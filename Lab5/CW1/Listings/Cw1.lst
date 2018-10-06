@@ -1,0 +1,460 @@
+A51 MACRO ASSEMBLER  CW1                                                                  10/05/2018 23:55:53 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Cw1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ..\Hw3\Cw1.asm SET(SMALL) DEBUG PRINT(.\Listings\Cw1.lst) OBJECT(.\Obje
+                      cts\Cw1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;----------
+                       2     ;Saregamapa
+                       3     ;Bhishma Dedhia
+                       4     ;----------
+0000                   5     org 0000h
+                       6             
+0000 02001E            7     ljmp main
+                       8     
+001B                   9     org 001bh
+001B 020223           10     ljmp isr_t1
+                      11             
+                      12     ;----------     
+001E                  13     main:
+001E 758911           14     mov tmod, #11h
+0021 759000           15     mov p1,#00h
+0024 7981             16     mov r1,#81h
+0026 7882             17     mov r0,#82h
+0028 774E             18     mov @r1,#4eh
+002A 7620             19     mov @r0,#20h
+                      20     ;setting sa
+002C 7983             21     mov r1,#83h
+002E 7884             22     mov r0,#84h
+0030 7710             23     mov @r1,#10h
+0032 7647             24     mov @r0,#47h
+                      25     
+0034 7A64             26     mov r2,#100
+0036 514F             27     acall load_timer
+                      28     
+0038 D2AB             29     setb et1
+003A D2AF             30     setb ea
+003C D28E             31     setb tr1
+003E 516B             32     acall fgenerator
+0040 C2AF             33     clr ea
+0042 C28E             34     clr tr1
+                      35     ;-------------
+0044 759000           36     mov p1,#00h
+0047 7981             37     mov r1,#81h
+0049 7882             38     mov r0,#82h
+004B 774E             39     mov @r1,#4eh
+004D 7620             40     mov @r0,#20h
+                      41     ;setting re
+004F 7983             42     mov r1,#83h
+0051 7884             43     mov r0,#84h
+0053 770E             44     mov @r1,#0eh
+0055 7678             45     mov @r0,#78h
+                      46     
+0057 7A64             47     mov r2,#100
+0059 514F             48     acall load_timer
+005B D2AB             49     setb et1
+005D D2AF             50     setb ea
+005F D28E             51     setb tr1
+0061 516B             52     acall fgenerator
+0063 C2AF             53     clr ea
+0065 C28E             54     clr tr1
+                      55     ;-----------------
+0067 759000           56     mov p1,#00h
+006A 7981             57     mov r1,#81h
+A51 MACRO ASSEMBLER  CW1                                                                  10/05/2018 23:55:53 PAGE     2
+
+006C 7882             58     mov r0,#82h
+006E 774E             59     mov @r1,#4eh
+0070 7620             60     mov @r0,#20h
+                      61     ;setting ga
+0072 7983             62     mov r1,#83h
+0074 7884             63     mov r0,#84h
+0076 770D             64     mov @r1,#0dh
+0078 7605             65     mov @r0,#05h
+                      66     
+007A 7A64             67     mov r2,#100
+007C 514F             68     acall load_timer
+007E D2AB             69     setb et1
+0080 D2AF             70     setb ea
+0082 D28E             71     setb tr1
+0084 516B             72     acall fgenerator
+0086 C2AF             73     clr ea
+0088 C28E             74     clr tr1
+                      75     ;-----------
+008A 759000           76     mov p1,#00h
+008D 7981             77     mov r1,#81h
+008F 7882             78     mov r0,#82h
+0091 774E             79     mov @r1,#4eh
+0093 7620             80     mov @r0,#20h
+                      81     ;setting ma
+0095 7983             82     mov r1,#83h
+0097 7884             83     mov r0,#84h
+0099 770C             84     mov @r1,#0ch
+009B 7635             85     mov @r0,#35h
+                      86     
+009D 7A64             87     mov r2,#100
+009F 514F             88     acall load_timer
+00A1 D2AB             89     setb et1
+00A3 D2AF             90     setb ea
+00A5 D28E             91     setb tr1
+00A7 516B             92     acall fgenerator
+00A9 C2AF             93     clr ea
+00AB C28E             94     clr tr1
+                      95     ;------------
+00AD 759000           96     mov p1,#00h
+00B0 7981             97     mov r1,#81h
+00B2 7882             98     mov r0,#82h
+00B4 774E             99     mov @r1,#4eh
+00B6 7620            100     mov @r0,#20h
+                     101     ;setting pa
+00B8 7983            102     mov r1,#83h
+00BA 7884            103     mov r0,#84h
+00BC 770A            104     mov @r1,#0ah
+00BE 76DA            105     mov @r0,#0dah
+                     106     
+00C0 7A64            107     mov r2,#100
+00C2 514F            108     acall load_timer
+00C4 D2AB            109     setb et1
+00C6 D2AF            110     setb ea
+00C8 D28E            111     setb tr1
+00CA 516B            112     acall fgenerator
+00CC C2AF            113     clr ea
+00CE C28E            114     clr tr1
+                     115     ;---------------
+00D0 759000          116     mov p1,#00h
+00D3 7981            117     mov r1,#81h
+00D5 7882            118     mov r0,#82h
+00D7 774E            119     mov @r1,#4eh
+00D9 7620            120     mov @r0,#20h
+                     121     ;setting dha
+00DB 7983            122     mov r1,#83h
+00DD 7884            123     mov r0,#84h
+A51 MACRO ASSEMBLER  CW1                                                                  10/05/2018 23:55:53 PAGE     3
+
+00DF 7709            124     mov @r1,#09h
+00E1 76C4            125     mov @r0,#0c4h
+                     126     
+00E3 7A64            127     mov r2,#100
+00E5 514F            128     acall load_timer
+00E7 D2AB            129     setb et1
+00E9 D2AF            130     setb ea
+00EB D28E            131     setb tr1
+00ED 516B            132     acall fgenerator
+00EF C2AF            133     clr ea
+00F1 C28E            134     clr tr1
+                     135     ;------------
+00F3 759000          136     mov p1,#00h
+00F6 7981            137     mov r1,#81h
+00F8 7882            138     mov r0,#82h
+00FA 774E            139     mov @r1,#4eh
+00FC 7620            140     mov @r0,#20h
+                     141     ;setting ni
+00FE 7983            142     mov r1,#83h
+0100 7884            143     mov r0,#84h
+0102 7708            144     mov @r1,#08h
+0104 76AE            145     mov @r0,#0aeh
+                     146     
+0106 7A64            147     mov r2,#100
+0108 514F            148     acall load_timer
+010A D2AB            149     setb et1
+010C D2AF            150     setb ea
+010E D28E            151     setb tr1
+0110 516B            152     acall fgenerator
+0112 C2AF            153     clr ea
+0114 C28E            154     clr tr1
+                     155     ;----------------
+0116 759000          156     mov p1,#00h
+0119 7981            157     mov r1,#81h
+011B 7882            158     mov r0,#82h
+011D 774E            159     mov @r1,#4eh
+011F 7620            160     mov @r0,#20h
+                     161     ;setting upper_sa
+0121 7983            162     mov r1,#83h
+0123 7884            163     mov r0,#84h
+0125 7708            164     mov @r1,#08h
+0127 7623            165     mov @r0,#23h
+                     166     
+0129 7A64            167     mov r2,#100
+012B 514F            168     acall load_timer
+012D D2AB            169     setb et1
+012F D2AF            170     setb ea
+0131 D28E            171     setb tr1
+0133 516B            172     acall fgenerator
+0135 C2AF            173     clr ea
+0137 C28E            174     clr tr1
+                     175     
+                     176     ;----------------
+                     177     ;pause
+0139 754001          178     mov 40h,#1
+013C 517F            179     acall delay1
+                     180     ;--------------
+013E 759000          181     mov p1,#00h
+0141 7981            182     mov r1,#81h
+0143 7882            183     mov r0,#82h
+0145 774E            184     mov @r1,#4eh
+0147 7620            185     mov @r0,#20h
+                     186     ;setting upper_sa
+0149 7983            187     mov r1,#83h
+014B 7884            188     mov r0,#84h
+014D 7708            189     mov @r1,#08h
+A51 MACRO ASSEMBLER  CW1                                                                  10/05/2018 23:55:53 PAGE     4
+
+014F 7623            190     mov @r0,#23h
+                     191     
+0151 7A64            192     mov r2,#100
+0153 514F            193     acall load_timer
+0155 D2AB            194     setb et1
+0157 D2AF            195     setb ea
+0159 D28E            196     setb tr1
+015B 516B            197     acall fgenerator
+015D C2AF            198     clr ea
+015F C28E            199     clr tr1
+                     200     ;--------------
+0161 759000          201     mov p1,#00h
+0164 7981            202     mov r1,#81h
+0166 7882            203     mov r0,#82h
+0168 774E            204     mov @r1,#4eh
+016A 7620            205     mov @r0,#20h
+                     206     ;setting ni
+016C 7983            207     mov r1,#83h
+016E 7884            208     mov r0,#84h
+0170 7708            209     mov @r1,#08h
+0172 76AE            210     mov @r0,#0aeh
+                     211     
+0174 7A64            212     mov r2,#100
+0176 514F            213     acall load_timer
+0178 D2AB            214     setb et1
+017A D2AF            215     setb ea
+017C D28E            216     setb tr1
+017E 516B            217     acall fgenerator
+0180 C2AF            218     clr ea
+0182 C28E            219     clr tr1
+                     220     ;----------------
+0184 759000          221     mov p1,#00h
+0187 7981            222     mov r1,#81h
+0189 7882            223     mov r0,#82h
+018B 774E            224     mov @r1,#4eh
+018D 7620            225     mov @r0,#20h
+                     226     ;setting dha
+018F 7983            227     mov r1,#83h
+0191 7884            228     mov r0,#84h
+0193 7709            229     mov @r1,#09h
+0195 76C4            230     mov @r0,#0c4h
+                     231     
+0197 7A64            232     mov r2,#100
+0199 514F            233     acall load_timer
+019B D2AB            234     setb et1
+019D D2AF            235     setb ea
+019F D28E            236     setb tr1
+01A1 516B            237     acall fgenerator
+01A3 C2AF            238     clr ea
+01A5 C28E            239     clr tr1
+                     240     ;--------------
+01A7 759000          241     mov p1,#00h
+01AA 7981            242     mov r1,#81h
+01AC 7882            243     mov r0,#82h
+01AE 774E            244     mov @r1,#4eh
+01B0 7620            245     mov @r0,#20h
+                     246     ;setting pa
+01B2 7983            247     mov r1,#83h
+01B4 7884            248     mov r0,#84h
+01B6 770A            249     mov @r1,#0ah
+01B8 76DA            250     mov @r0,#0dah
+                     251     
+01BA 7A64            252     mov r2,#100
+01BC 514F            253     acall load_timer
+01BE D2AB            254     setb et1
+01C0 D2AF            255     setb ea
+A51 MACRO ASSEMBLER  CW1                                                                  10/05/2018 23:55:53 PAGE     5
+
+01C2 D28E            256     setb tr1
+01C4 516B            257     acall fgenerator
+01C6 C2AF            258     clr ea
+01C8 C28E            259     clr tr1
+                     260     ;-------------------
+01CA 759000          261     mov p1,#00h
+01CD 7981            262     mov r1,#81h
+01CF 7882            263     mov r0,#82h
+01D1 774E            264     mov @r1,#4eh
+01D3 7620            265     mov @r0,#20h
+                     266     ;setting ma
+01D5 7983            267     mov r1,#83h
+01D7 7884            268     mov r0,#84h
+01D9 770C            269     mov @r1,#0ch
+01DB 7635            270     mov @r0,#35h
+                     271     
+01DD 7A64            272     mov r2,#100
+01DF 514F            273     acall load_timer
+01E1 D2AB            274     setb et1
+01E3 D2AF            275     setb ea
+01E5 D28E            276     setb tr1
+01E7 516B            277     acall fgenerator
+01E9 C2AF            278     clr ea
+01EB C28E            279     clr tr1
+                     280     ;---------------
+01ED 759000          281     mov p1,#00h
+01F0 7981            282     mov r1,#81h
+01F2 7882            283     mov r0,#82h
+01F4 774E            284     mov @r1,#4eh
+01F6 7620            285     mov @r0,#20h
+                     286     ;setting ga
+01F8 7983            287     mov r1,#83h
+01FA 7884            288     mov r0,#84h
+01FC 770D            289     mov @r1,#0dh
+01FE 7605            290     mov @r0,#05h
+                     291     
+0200 7A64            292     mov r2,#100
+0202 514F            293     acall load_timer
+0204 D2AB            294     setb et1
+0206 D2AF            295     setb ea
+0208 D28E            296     setb tr1
+020A 516B            297     acall fgenerator
+020C C2AF            298     clr ea
+020E C28E            299     clr tr1
+                     300     ;---------------
+0210 759000          301     mov p1,#00h
+0213 7981            302     mov r1,#81h
+0215 7882            303     mov r0,#82h
+0217 774E            304     mov @r1,#4eh
+0219 7620            305     mov @r0,#20h
+                     306     ;setting re
+021B 7983            307     mov r1,#83h
+021D 7884            308     mov r0,#84h
+021F 770E            309     mov @r1,#0eh
+0221 7678            310     mov @r0,#78h
+0223                 311     isr_t1:
+0223 1A              312     dec r2
+0224 514F            313     acall load_timer
+0226 32              314     reti
+                     315     ;-----------
+0227 758911          316     mov tmod, #11h
+022A 759000          317     mov p1,#00h
+022D 7981            318     mov r1,#81h
+022F 7882            319     mov r0,#82h
+0231 774E            320     mov @r1,#4eh
+0233 7620            321     mov @r0,#20h
+A51 MACRO ASSEMBLER  CW1                                                                  10/05/2018 23:55:53 PAGE     6
+
+                     322     ;setting sa
+0235 7983            323     mov r1,#83h
+0237 7884            324     mov r0,#84h
+0239 7710            325     mov @r1,#10h
+023B 7647            326     mov @r0,#47h
+                     327     
+023D 7A64            328     mov r2,#100
+023F 514F            329     acall load_timer
+                     330     
+0241 D2AB            331     setb et1
+0243 D2AF            332     setb ea
+0245 D28E            333     setb tr1
+0247 516B            334     acall fgenerator
+0249 C2AF            335     clr ea
+024B C28E            336     clr tr1
+024D 80FE            337     here: sjmp here
+                     338     ;-------------
+                     339     
+024F                 340     load_timer:
+024F 7982            341     mov r1,#82h
+0251 C3              342     clr c
+0252 E4              343     clr a
+0253 97              344     subb a,@r1
+0254 F58B            345     mov tl1,a
+0256 E4              346     clr a
+0257 7981            347     mov r1,#81h
+0259 97              348     subb a,@r1
+025A F58D            349     mov th1,a
+025C 22              350     ret
+                     351     ;------------
+025D                 352     load_timer1:
+025D 7984            353     mov r1,#84h
+025F C3              354     clr c
+0260 E4              355     clr a
+0261 97              356     subb a,@r1
+0262 F58A            357     mov tl0,a
+0264 E4              358     clr a
+0265 7983            359     mov r1,#83h
+0267 97              360     subb a,@r1
+0268 F58C            361     mov th0,a
+026A 22              362     ret
+                     363     ;-----------
+026B                 364     fgenerator:
+                     365     
+026B C283            366     clr p0.3
+026D                 367     again:
+026D 515D            368     acall load_timer1
+026F D28C            369     setb tr0
+0271 308DFD          370     loop: jnb tf0,loop
+0274 B283            371     cpl p0.3
+0276 C28C            372     clr tr0
+0278 C28D            373     clr tf0
+027A EA              374     mov a,r2
+027B B400EF          375     cjne a,#0,again
+027E 22              376     ret
+                     377     ;-----------
+                     378     
+027F                 379     DELAY1: 
+027F D2D5            380             SETB PSW.5
+0281 AB40            381                        MOV R3, 40H
+0283                 382             BACK3: 
+0283 7C0A            383                        MOV R4, #10
+0285                 384             BACK2:     
+0285 7DC8            385                        MOV R5,#200
+0287                 386             BACK1:
+0287 79FF            387                        MOV R1,#0FFH
+A51 MACRO ASSEMBLER  CW1                                                                  10/05/2018 23:55:53 PAGE     7
+
+0289                 388             BACK:
+0289 D9FE            389                        DJNZ R1, BACK
+028B DDFA            390                        DJNZ R5, BACK1
+028D DCF6            391                        DJNZ R4, BACK2
+028F DBF2            392                        DJNZ R3, BACK3
+0291 C2D5            393                        CLR PSW.5
+0293 22              394                RET
+                     395     end
+                                     
+                                     
+                                     
+A51 MACRO ASSEMBLER  CW1                                                                  10/05/2018 23:55:53 PAGE     8
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   026DH   A   
+BACK . . . . . . .  C ADDR   0289H   A   
+BACK1. . . . . . .  C ADDR   0287H   A   
+BACK2. . . . . . .  C ADDR   0285H   A   
+BACK3. . . . . . .  C ADDR   0283H   A   
+DELAY1 . . . . . .  C ADDR   027FH   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET1. . . . . . . .  B ADDR   00A8H.3 A   
+FGENERATOR . . . .  C ADDR   026BH   A   
+HERE . . . . . . .  C ADDR   024DH   A   
+ISR_T1 . . . . . .  C ADDR   0223H   A   
+LOAD_TIMER . . . .  C ADDR   024FH   A   
+LOAD_TIMER1. . . .  C ADDR   025DH   A   
+LOOP . . . . . . .  C ADDR   0271H   A   
+MAIN . . . . . . .  C ADDR   001EH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

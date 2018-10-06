@@ -1,0 +1,118 @@
+A51 MACRO ASSEMBLER  Q3                                                                   08/13/2018 16:32:45 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Q3.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE ..\Q2\Q3.ASM SET(SMALL) DEBUG PRINT(.\Listings\Q3.lst) OBJECT(.\Objects
+                      \Q3.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;---------
+                       2     ;AUTHOR: BHISHMA DEDHIA
+                       3     ;NAME: PACK AND READ NIBBLES
+                       4     ;---------
+0000                   5     ORG 0H
+0000 02009D            6     LJMP MAIN
+                       7     ;---------
+0050                   8     ORG 50H
+0050                   9             DELAY: 
+0050 D2D5             10             SETB PSW.5
+0052 AB40             11                        MOV R3, 40H
+0054                  12             BACK3: 
+0054 7C0A             13                        MOV R4, #10
+0056                  14             BACK2:     
+0056 7DC8             15                        MOV R5,#200
+0058                  16             BACK1:
+0058 79FF             17                        MOV R1,#0FFH
+005A                  18             BACK:
+005A D9FE             19                        DJNZ R1, BACK
+005C DDFA             20                        DJNZ R5, BACK1
+005E DCF6             21                        DJNZ R4, BACK2
+0060 DBF2             22                        DJNZ R3, BACK3
+0062 C2D5             23                        CLR PSW.5
+0064 22               24                RET
+                      25     ;--------
+0065                  26             READIP:
+0065 E590             27             MOV A,P1
+0067 540F             28             ANL A,#0FH
+0069 F6               29             MOV @R0,A
+006A C4               30             SWAP A
+006B 440F             31             ORL A,#0FH
+006D F590             32             MOV P1,A        
+006F 22               33             RET
+                      34     ;--------       
+0070                  35             READNIBBLE:
+0070 A860             36             MOV R0,60H
+0072 75400A           37             MOV 40H,#10
+0075 7590FF           38             MOV P1,#0FFH
+0078 120050           39             LCALL DELAY
+007B 75900F           40             MOV P1,#0FH
+007E 754002           41             MOV 40H,#2
+0081 120050           42             LCALL DELAY
+0084 120065           43             LCALL READIP
+0087 75400A           44             MOV 40H,#10
+008A 120050           45             LCALL DELAY
+                      46             ;MOV P1,#0FH
+008D E590             47             MOV A,P1
+008F 540F             48             ANL A,#0FH
+0091 B40FDC           49             CJNE A,#0FH,READNIBBLE
+0094 22               50             RET
+                      51     ;--------       
+0095                  52             PACKNIBBLE:
+0095 E54E             53             MOV A,4EH
+0097 C4               54             SWAP A
+0098 254F             55             ADD A,4FH
+009A F550             56             MOV 50H,A
+009C 22               57             RET
+A51 MACRO ASSEMBLER  Q3                                                                   08/13/2018 16:32:45 PAGE     2
+
+                      58     ;--------
+009D                  59             MAIN:
+009D 75604E           60             MOV 60H,#4EH
+00A0 120070           61             LCALL READNIBBLE
+00A3 75604F           62             MOV 60H,#4FH
+00A6 120070           63             LCALL READNIBBLE
+00A9 120095           64             LCALL PACKNIBBLE
+00AC 754002           65             MOV 40H,#2
+00AF E54E             66             MOV A,4EH
+00B1 C4               67             SWAP A
+00B2 F590             68             MOV P1,A
+00B4 120050           69             LCALL DELAY
+00B7 E54F             70             MOV A,4FH
+00B9 C4               71             SWAP A
+00BA F590             72             MOV P1,A
+00BC 120050           73             LCALL DELAY
+00BF 759000           74             MOV P1,#00H
+00C2 80FE             75             HERE: SJMP HERE
+                      76             
+                      77             
+                      78             END
+                                     
+                                     
+A51 MACRO ASSEMBLER  Q3                                                                   08/13/2018 16:32:45 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BACK . . . . . . .  C ADDR   005AH   A   
+BACK1. . . . . . .  C ADDR   0058H   A   
+BACK2. . . . . . .  C ADDR   0056H   A   
+BACK3. . . . . . .  C ADDR   0054H   A   
+DELAY. . . . . . .  C ADDR   0050H   A   
+HERE . . . . . . .  C ADDR   00C2H   A   
+MAIN . . . . . . .  C ADDR   009DH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PACKNIBBLE . . . .  C ADDR   0095H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+READIP . . . . . .  C ADDR   0065H   A   
+READNIBBLE . . . .  C ADDR   0070H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

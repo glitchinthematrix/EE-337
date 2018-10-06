@@ -1,0 +1,3 @@
+".\Objects\BONUS.obj" 
+TO ".\Objects\BONUS_QUESTION" 
+PRINT(".\Listings\BONUS_QUESTION.m51") RAMSIZE(256) 

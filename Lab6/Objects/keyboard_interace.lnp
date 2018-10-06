@@ -1,0 +1,3 @@
+".\Objects\keyboard_interface.obj" 
+TO ".\Objects\keyboard_interace" 
+PRINT(".\Listings\keyboard_interace.m51") RAMSIZE(256) 

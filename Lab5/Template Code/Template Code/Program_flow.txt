@@ -1,0 +1,17 @@
+;-- Program flow to play musical notes.
+
+;-- store the timer  values for each  musical notes in a look-up table(consecutive memory locations)
+;-- Use Timer 1 for tone duration and Timer 0 for notes (frequency)
+;-- First, initialise the Timers
+;-- When one note duration finishes then update the timer 0 with new values
+;-- keep monitoring the no. of notes to be played, when all notes are played (both ascending and descending) either
+    you can stop both the timers or play the sequence all over again.
+
+Hint
+;-- for pause, you have to stop the timer0 for a particular duration
+
+
+
+
+
+

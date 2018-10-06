@@ -1,0 +1,51 @@
+;----- Template code for generating square wave of 240 Hz
+
+
+
+
+ORG 0000H
+LJMP MAIN 		   		 ;--by-pass int. vector table
+
+
+
+;--ISR for timer 0 to generate square wave
+
+ORG 000BH 			 	 ;--Timer 0 int. vector table( For more details read the Timers Document Section 3.1)
+LJMP ISR_T0		 	         ;--jump to ISR 
+
+
+
+;--The main program for initialization
+
+
+ORG 0030H 				;--after vector table space
+MAIN:
+ 				
+;--initialization of timer
+;--start the timer by setting TR0 bit
+
+
+BACK: SJMP BACK 			;--keep doing it
+
+
+
+;--Timer 0 ISR. Must be reloaded, not auto-reload
+
+
+ORG 200H
+ISR_T0:
+	
+
+;--stop Timer 0
+;--reload the TL0, TH0
+;--Toggle the pin
+;--start the timer
+
+
+
+RETI 					;--return to main
+END
+	
+	
+	
+	

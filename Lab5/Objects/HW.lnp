@@ -1,0 +1,4 @@
+".\Objects\HW1.obj" 
+TO ".\Objects\HW" 
+PRINT(".\Listings\HW.m51") RAMSIZE(256) 
+XDATA( 0X0000-0X03FF )

@@ -1,0 +1,436 @@
+A51 MACRO ASSEMBLER  SAARE_JAHAN_SE_ACHA                                                  08/27/2018 15:51:18 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Saare_jahan_se_acha.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Saare_jahan_se_acha.asm SET(SMALL) DEBUG PRINT(.\Listings\Saare_jahan_s
+                      e_acha.lst) OBJECT(.\Objects\Saare_jahan_se_acha.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;----------
+                       2     ;Sarejahanseacha
+                       3     ;Bhishma Dedhia
+                       4     ;----------
+0000                   5     org 0000h
+                       6             
+0000 02001E            7     ljmp main
+                       8     
+001B                   9     org 001bh
+001B 020248           10     ljmp isr_t1
+                      11     ;-------------
+001E                  12     main:
+001E 758911           13     mov tmod, #11h
+0021 759000           14     mov p1,#00h
+0024 7981             15     mov r1,#81h
+0026 7882             16     mov r0,#82h
+0028 774E             17     mov @r1,#4eh
+002A 7620             18     mov @r0,#20h
+                      19     ;komal ga for 0.66
+002C 7983             20     mov r1,#83h
+002E 7884             21     mov r0,#84h
+0030 770D             22     mov @r1,#0dh
+0032 7690             23     mov @r0,#90h
+                      24     
+0034 7A42             25     mov r2,#66
+0036 514C             26     acall load_timer
+                      27     
+0038 D2AB             28     setb et1
+003A D2AF             29     setb ea
+003C D28E             30     setb tr1
+003E 5168             31     acall fgenerator
+0040 C2AF             32     clr ea
+0042 C28E             33     clr tr1
+                      34     ;--------------
+0044 758911           35     mov tmod, #11h
+0047 759000           36     mov p1,#00h
+004A 7981             37     mov r1,#81h
+004C 7882             38     mov r0,#82h
+004E 774E             39     mov @r1,#4eh
+0050 7620             40     mov @r0,#20h
+                      41     ;setting re for 0.66
+0052 7983             42     mov r1,#83h
+0054 7884             43     mov r0,#84h
+0056 770E             44     mov @r1,#0eh
+0058 7678             45     mov @r0,#78h
+                      46     
+005A 7A42             47     mov r2,#66
+005C 514C             48     acall load_timer
+                      49     
+005E D2AB             50     setb et1
+0060 D2AF             51     setb ea
+0062 D28E             52     setb tr1
+0064 5168             53     acall fgenerator
+0066 C2AF             54     clr ea
+0068 C28E             55     clr tr1
+                      56     ;------------
+006A 758911           57     mov tmod, #11h
+A51 MACRO ASSEMBLER  SAARE_JAHAN_SE_ACHA                                                  08/27/2018 15:51:18 PAGE     2
+
+006D 759000           58     mov p1,#00h
+0070 7981             59     mov r1,#81h
+0072 7882             60     mov r0,#82h
+0074 774E             61     mov @r1,#4eh
+0076 7620             62     mov @r0,#20h
+                      63     ;setting sa for 0.33
+0078 7983             64     mov r1,#83h
+007A 7884             65     mov r0,#84h
+007C 7710             66     mov @r1,#10h
+007E 7647             67     mov @r0,#47h
+                      68     
+0080 7A21             69     mov r2,#33
+0082 514C             70     acall load_timer
+                      71     
+0084 D2AB             72     setb et1
+0086 D2AF             73     setb ea
+0088 D28E             74     setb tr1
+008A 5168             75     acall fgenerator
+008C C2AF             76     clr ea
+008E C28E             77     clr tr1
+                      78     ;-------------
+0090 758911           79     mov tmod, #11h
+0093 759000           80     mov p1,#00h
+0096 7981             81     mov r1,#81h
+0098 7882             82     mov r0,#82h
+009A 774E             83     mov @r1,#4eh
+009C 7620             84     mov @r0,#20h
+                      85     ;setting re for 0.66
+009E 7983             86     mov r1,#83h
+00A0 7884             87     mov r0,#84h
+00A2 770E             88     mov @r1,#0eh
+00A4 7678             89     mov @r0,#78h
+                      90     
+00A6 7A42             91     mov r2,#66
+00A8 514C             92     acall load_timer
+                      93     
+00AA D2AB             94     setb et1
+00AC D2AF             95     setb ea
+00AE D28E             96     setb tr1
+00B0 5168             97     acall fgenerator
+00B2 C2AF             98     clr ea
+00B4 C28E             99     clr tr1
+                     100     ;-----------------
+00B6 758911          101     mov tmod, #11h
+00B9 759000          102     mov p1,#00h
+00BC 7981            103     mov r1,#81h
+00BE 7882            104     mov r0,#82h
+00C0 774E            105     mov @r1,#4eh
+00C2 7620            106     mov @r0,#20h
+                     107     ;setting lower_ni for 0.33
+00C4 7983            108     mov r1,#83h
+00C6 7884            109     mov r0,#84h
+00C8 7711            110     mov @r1,#11h
+00CA 765C            111     mov @r0,#5ch
+                     112     
+00CC 7A21            113     mov r2,#33
+00CE 514C            114     acall load_timer
+                     115     
+00D0 D2AB            116     setb et1
+00D2 D2AF            117     setb ea
+00D4 D28E            118     setb tr1
+00D6 5168            119     acall fgenerator
+00D8 C2AF            120     clr ea
+00DA C28E            121     clr tr1
+                     122     ;-------------
+00DC 758911          123     mov tmod, #11h
+A51 MACRO ASSEMBLER  SAARE_JAHAN_SE_ACHA                                                  08/27/2018 15:51:18 PAGE     3
+
+00DF 759000          124     mov p1,#00h
+00E2 7981            125     mov r1,#81h
+00E4 7882            126     mov r0,#82h
+00E6 774E            127     mov @r1,#4eh
+00E8 7620            128     mov @r0,#20h
+                     129     ;setting Sa for 1
+00EA 7983            130     mov r1,#83h
+00EC 7884            131     mov r0,#84h
+00EE 7710            132     mov @r1,#10h
+00F0 7647            133     mov @r0,#47h
+                     134     
+00F2 7A64            135     mov r2,#100
+00F4 514C            136     acall load_timer
+                     137     
+00F6 D2AB            138     setb et1
+00F8 D2AF            139     setb ea
+00FA D28E            140     setb tr1
+00FC 5168            141     acall fgenerator
+00FE C2AF            142     clr ea
+0100 C28E            143     clr tr1
+                     144     ;--------------
+                     145     ;pausing for 0.33
+0102 758911          146     mov tmod, #11h
+0105 759000          147     mov p1,#00h
+0108 7981            148     mov r1,#81h
+010A 7882            149     mov r0,#82h
+010C 774E            150     mov @r1,#4eh
+010E 7620            151     mov @r0,#20h
+0110 7A21            152     mov r2,#33
+0112 514C            153     acall load_timer
+0114 D2AB            154     setb et1
+0116 D2AF            155     setb ea
+0118 D28E            156     setb tr1
+011A EA              157     here1: mov a,r2
+011B 70FD            158     jnz here1
+011D C2AF            159     clr ea
+011F C28E            160     clr tr1
+                     161     ;---------------
+0121 758911          162     mov tmod, #11h
+0124 759000          163     mov p1,#00h
+0127 7981            164     mov r1,#81h
+0129 7882            165     mov r0,#82h
+012B 774E            166     mov @r1,#4eh
+012D 7620            167     mov @r0,#20h
+                     168     ;setting lower_Pa for 0.33
+012F 7983            169     mov r1,#83h
+0131 7884            170     mov r0,#84h
+0133 7715            171     mov @r1,#15h
+0135 76B4            172     mov @r0,#0b4h
+                     173     
+0137 7A21            174     mov r2,#33
+0139 514C            175     acall load_timer
+                     176     
+013B D2AB            177     setb et1
+013D D2AF            178     setb ea
+013F D28E            179     setb tr1
+0141 5168            180     acall fgenerator
+0143 C2AF            181     clr ea
+0145 C28E            182     clr tr1
+                     183     ;-----------
+0147 758911          184     mov tmod, #11h
+014A 759000          185     mov p1,#00h
+014D 7981            186     mov r1,#81h
+014F 7882            187     mov r0,#82h
+0151 774E            188     mov @r1,#4eh
+0153 7620            189     mov @r0,#20h
+A51 MACRO ASSEMBLER  SAARE_JAHAN_SE_ACHA                                                  08/27/2018 15:51:18 PAGE     4
+
+                     190     ;setting lower_dha for 0.33
+0155 7983            191     mov r1,#83h
+0157 7884            192     mov r0,#84h
+0159 7713            193     mov @r1,#13h
+015B 7688            194     mov @r0,#88h
+                     195     
+015D 7A21            196     mov r2,#33
+015F 514C            197     acall load_timer
+                     198     
+0161 D2AB            199     setb et1
+0163 D2AF            200     setb ea
+0165 D28E            201     setb tr1
+0167 5168            202     acall fgenerator
+0169 C2AF            203     clr ea
+016B C28E            204     clr tr1
+                     205     ;-----------
+016D 758911          206     mov tmod, #11h
+0170 759000          207     mov p1,#00h
+0173 7981            208     mov r1,#81h
+0175 7882            209     mov r0,#82h
+0177 774E            210     mov @r1,#4eh
+0179 7620            211     mov @r0,#20h
+                     212     ;setting lower_Pa for 0.33
+017B 7983            213     mov r1,#83h
+017D 7884            214     mov r0,#84h
+017F 7715            215     mov @r1,#15h
+0181 76B4            216     mov @r0,#0b4h
+                     217     
+0183 7A21            218     mov r2,#33
+0185 514C            219     acall load_timer
+                     220     
+0187 D2AB            221     setb et1
+0189 D2AF            222     setb ea
+018B D28E            223     setb tr1
+018D 5168            224     acall fgenerator
+018F C2AF            225     clr ea
+0191 C28E            226     clr tr1
+                     227     ;------------
+0193 758911          228     mov tmod, #11h
+0196 759000          229     mov p1,#00h
+0199 7981            230     mov r1,#81h
+019B 7882            231     mov r0,#82h
+019D 774E            232     mov @r1,#4eh
+019F 7620            233     mov @r0,#20h
+                     234     ;setting sa
+01A1 7983            235     mov r1,#83h
+01A3 7884            236     mov r0,#84h
+01A5 7710            237     mov @r1,#10h
+01A7 7647            238     mov @r0,#47h
+                     239     
+01A9 7A42            240     mov r2,#66
+01AB 514C            241     acall load_timer
+                     242     
+01AD D2AB            243     setb et1
+01AF D2AF            244     setb ea
+01B1 D28E            245     setb tr1
+01B3 5168            246     acall fgenerator
+01B5 C2AF            247     clr ea
+01B7 C28E            248     clr tr1
+                     249     ;-------------
+01B9 759000          250     mov p1,#00h
+01BC 7981            251     mov r1,#81h
+01BE 7882            252     mov r0,#82h
+01C0 774E            253     mov @r1,#4eh
+01C2 7620            254     mov @r0,#20h
+                     255     ;setting re
+A51 MACRO ASSEMBLER  SAARE_JAHAN_SE_ACHA                                                  08/27/2018 15:51:18 PAGE     5
+
+01C4 7983            256     mov r1,#83h
+01C6 7884            257     mov r0,#84h
+01C8 770E            258     mov @r1,#0eh
+01CA 7678            259     mov @r0,#78h
+                     260     
+01CC 7A21            261     mov r2,#33
+01CE 514C            262     acall load_timer
+01D0 D2AB            263     setb et1
+01D2 D2AF            264     setb ea
+01D4 D28E            265     setb tr1
+01D6 5168            266     acall fgenerator
+01D8 C2AF            267     clr ea
+01DA C28E            268     clr tr1
+                     269     ;-----------------
+01DC 759000          270     mov p1,#00h
+01DF 7981            271     mov r1,#81h
+01E1 7882            272     mov r0,#82h
+01E3 774E            273     mov @r1,#4eh
+01E5 7620            274     mov @r0,#20h
+                     275     ;setting ga
+01E7 7983            276     mov r1,#83h
+01E9 7884            277     mov r0,#84h
+01EB 770D            278     mov @r1,#0dh
+01ED 7605            279     mov @r0,#05h
+                     280     
+01EF 7A42            281     mov r2,#66
+01F1 514C            282     acall load_timer
+01F3 D2AB            283     setb et1
+01F5 D2AF            284     setb ea
+01F7 D28E            285     setb tr1
+01F9 5168            286     acall fgenerator
+01FB C2AF            287     clr ea
+01FD C28E            288     clr tr1
+                     289     ;-----------
+01FF 759000          290     mov p1,#00h
+0202 7981            291     mov r1,#81h
+0204 7882            292     mov r0,#82h
+0206 774E            293     mov @r1,#4eh
+0208 7620            294     mov @r0,#20h
+                     295     ;setting ma
+020A 7983            296     mov r1,#83h
+020C 7884            297     mov r0,#84h
+020E 770C            298     mov @r1,#0ch
+0210 7635            299     mov @r0,#35h
+                     300     
+0212 7A21            301     mov r2,#33
+0214 514C            302     acall load_timer
+0216 D2AB            303     setb et1
+0218 D2AF            304     setb ea
+021A D28E            305     setb tr1
+021C 5168            306     acall fgenerator
+021E C2AF            307     clr ea
+0220 C28E            308     clr tr1
+                     309     ;------------
+0222 759000          310     mov p1,#00h
+0225 7981            311     mov r1,#81h
+0227 7882            312     mov r0,#82h
+0229 774E            313     mov @r1,#4eh
+022B 7620            314     mov @r0,#20h
+                     315     ;setting ga for 1
+022D 7983            316     mov r1,#83h
+022F 7884            317     mov r0,#84h
+0231 770D            318     mov @r1,#0dh
+0233 7605            319     mov @r0,#05h
+                     320     
+0235 7A64            321     mov r2,#100
+A51 MACRO ASSEMBLER  SAARE_JAHAN_SE_ACHA                                                  08/27/2018 15:51:18 PAGE     6
+
+0237 514C            322     acall load_timer
+0239 D2AB            323     setb et1
+023B D2AF            324     setb ea
+023D D28E            325     setb tr1
+023F 5168            326     acall fgenerator
+0241 C2AF            327     clr ea
+0243 C28E            328     clr tr1
+0245 02001E          329     LJMP main
+                     330     ;------------
+0248                 331     isr_t1:
+0248 1A              332     dec r2
+0249 514C            333     acall load_timer
+024B 32              334     reti
+024C                 335     load_timer:
+024C 7982            336     mov r1,#82h
+024E C3              337     clr c
+024F E4              338     clr a
+0250 97              339     subb a,@r1
+0251 F58B            340     mov tl1,a
+0253 E4              341     clr a
+0254 7981            342     mov r1,#81h
+0256 97              343     subb a,@r1
+0257 F58D            344     mov th1,a
+0259 22              345     ret
+                     346     ;------------
+025A                 347     load_timer1:
+025A 7984            348     mov r1,#84h
+025C C3              349     clr c
+025D E4              350     clr a
+025E 97              351     subb a,@r1
+025F F58A            352     mov tl0,a
+0261 E4              353     clr a
+0262 7983            354     mov r1,#83h
+0264 97              355     subb a,@r1
+0265 F58C            356     mov th0,a
+0267 22              357     ret
+                     358     ;-----------
+0268                 359     fgenerator:
+0268 C283            360     clr p0.3
+026A 120272          361     again: lcall delay
+026D EA              362     mov a,r2
+026E B400F9          363     cjne a,#0,again
+0271 22              364     ret
+                     365     ;-----------
+0272                 366     delay:
+0272 120278          367     lcall start_count
+0275 B283            368     cpl p0.3
+0277 22              369     ret 
+                     370     ;-----------
+0278                 371     start_count:
+0278 515A            372     acall load_timer1
+027A D28C            373     setb tr0
+027C 308DFD          374     loop: jnb tf0,loop
+027F C28C            375     clr tr0
+0281 C28D            376     clr tf0
+0283 22              377     ret
+                     378     ;-----------
+                     379     end
+                                     
+A51 MACRO ASSEMBLER  SAARE_JAHAN_SE_ACHA                                                  08/27/2018 15:51:18 PAGE     7
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   026AH   A   
+DELAY. . . . . . .  C ADDR   0272H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET1. . . . . . . .  B ADDR   00A8H.3 A   
+FGENERATOR . . . .  C ADDR   0268H   A   
+HERE1. . . . . . .  C ADDR   011AH   A   
+ISR_T1 . . . . . .  C ADDR   0248H   A   
+LOAD_TIMER . . . .  C ADDR   024CH   A   
+LOAD_TIMER1. . . .  C ADDR   025AH   A   
+LOOP . . . . . . .  C ADDR   027CH   A   
+MAIN . . . . . . .  C ADDR   001EH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+START_COUNT. . . .  C ADDR   0278H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,48 @@
+A51 MACRO ASSEMBLER  HW1                                                                  08/25/2018 22:24:50 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\HW1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE HW1.asm SET(SMALL) DEBUG PRINT(.\Listings\HW1.lst) OBJECT(.\Objects\HW1
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00h
+0000 020010            2     LJMP MAIN
+                       3     
+                       4     
+0003                   5     load_timer:
+0003 A982              6     mov r1,82h
+0005 C3                7     clr c
+0006 E4                8     clr a
+0007 97                9     subb a,@r1
+0008 F58A             10     mov tl0,a
+000A E4               11     clr a
+000B A981             12     mov r1,81h
+000D 97               13     subb a,@r1
+000E F58C             14     mov th0,a
+                      15     
+                      16     
+0010                  17     MAIN:
+0010 120003           18     lcall load_timer
+                      19     
+                      20     end
+A51 MACRO ASSEMBLER  HW1                                                                  08/25/2018 22:24:50 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+LOAD_TIMER . . . .  C ADDR   0003H   A   
+MAIN . . . . . . .  C ADDR   0010H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

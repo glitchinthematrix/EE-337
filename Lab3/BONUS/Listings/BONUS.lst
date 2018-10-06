@@ -1,0 +1,74 @@
+A51 MACRO ASSEMBLER  BONUS                                                                08/17/2018 17:29:18 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\BONUS.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE BONUS.ASM SET(SMALL) DEBUG PRINT(.\Listings\BONUS.lst) OBJECT(.\Objects
+                      \BONUS.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;--------
+                       2     ;AUTHOR:BHISHMA DEDHIA
+                       3     ;TITLE:SQUARE ROOT
+                       4     ;--------
+                       5     
+0000                   6     ORG 00H
+0000 020067            7     LJMP MAIN
+0050                   8     ORG 50H
+0050                   9             FINDSQRT:
+0050 F9               10                     MOV R1,A
+0051 75F002           11                     MOV B,#02
+0054 84               12                     DIV AB
+0055 FB               13                     MOV R3,A
+0056 EA               14                     MOV A,R2
+0057 89F0             15                     MOV B,R1
+0059 84               16                     DIV AB
+005A 75F002           17                     MOV B,#02
+005D 84               18                     DIV AB
+005E 8B40             19                     MOV 40H,R3
+                      20                     ;INC R4
+                      21                     ;CJNE R4,#81 ,EXIT
+0060 2B               22                     ADD A,R3
+0061 8940             23                     MOV 40H,R1
+0063 B540EA           24                     CJNE A,40H,FINDSQRT
+0066 22               25                     RET
+                      26             
+0067                  27             MAIN:
+0067 7550B9           28                     MOV 50H,#0B9H
+006A AA50             29                     MOV R2,50H
+006C 7401             30                     MOV A,#1
+006E 120050           31                     LCALL FINDSQRT
+0071 E9               32                     MOV A,R1
+0072 89F0             33                     MOV B,R1
+0074 A4               34                     MUL AB
+0075 B55006           35                     CJNE A,50H,DISPLAYSIGNIBBLE
+0078 E9               36                     MOV A, R1
+0079 C4               37                     SWAP A
+007A F590             38                     MOV P1,A
+007C 8003             39                     SJMP HERE
+007E                  40                     DISPLAYSIGNIBBLE:
+007E 855090           41                     MOV P1,50H
+0081                  42                     HERE:
+0081 80FE             43                     SJMP HERE
+                      44     END
+A51 MACRO ASSEMBLER  BONUS                                                                08/17/2018 17:29:18 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+DISPLAYSIGNIBBLE .  C ADDR   007EH   A   
+FINDSQRT . . . . .  C ADDR   0050H   A   
+HERE . . . . . . .  C ADDR   0081H   A   
+MAIN . . . . . . .  C ADDR   0067H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

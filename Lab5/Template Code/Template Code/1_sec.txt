@@ -1,0 +1,57 @@
+;------ Template code for generating 1 sec delay
+;------ Find the value of TH0, TL0 for which it produces a delay of 1/60 sec. 
+;-------Use register R0 to count no. of times the timer should be reloaded to get the desired time period (0.33 sec, 0.66 sec and 1 sec). 
+;------ Then if you change R0 to 40  it gives a delay of .66 sec and for R0 20 it gives a delay of .33 sec
+
+
+
+ORG 0000H
+LJMP MAIN		   ; by-pass int. vector table
+
+;--ISR for timer 0 to generate a square wave
+
+
+ORG 000BH                  ;Timer 0 int. vector table( For details Read the Timers Document section 3.1)
+LJMP ISR_T0                ;jump to ISR
+
+
+
+;--The main program for initialization
+
+    
+ORG 0030H                 ; after vector tablespace
+MAIN:                 
+    
+;--initialization of timer
+;--start the timer by setting TR0 bit
+;--load register R0
+
+
+BACK: SJMP BACK          ; keep doing it
+
+
+
+
+; Timer 0 ISR. Must be reloaded, not auto-reload
+
+ORG 200H
+ISR_T0:
+    
+
+;--stop Timer 0
+;-- reload the TL0, TH0-------
+;-- monitor no. of times timer runs using R0
+    (if the desired time duration is over
+    then Toggle the LED)
+    else
+    loopback
+
+;-- start Timer 0
+
+
+
+RETI; return to main
+
+END
+    
+    

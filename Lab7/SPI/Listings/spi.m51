@@ -1,0 +1,496 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    09/24/2018  17:36:19  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\spi.obj TO .\Objects\spi PRINT (.\Listings\spi.m51) RAMSIZE
+>>  (256)
+
+
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (?C_STARTUP)
+  .\Objects\spi.obj (SPI)
+  C:\KEIL_V5\C51\LIB\C51FPS.LIB (?C?FPADD)
+  C:\KEIL_V5\C51\LIB\C51FPS.LIB (?C?FPMUL)
+  C:\KEIL_V5\C51\LIB\C51FPS.LIB (?C?FPDIV)
+  C:\KEIL_V5\C51\LIB\C51FPS.LIB (?C?FCAST)
+  C:\KEIL_V5\C51\LIB\C51FPS.LIB (?C?CASTF)
+  C:\KEIL_V5\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?COPY)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?ULDIV)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?LNEG)
+
+
+LINK MAP OF MODULE:  .\Objects\spi (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0013H     UNIT         _DATA_GROUP_
+                    001BH     0005H                  *** GAP ***
+            BIT     0020H.0   0000H.3   UNIT         ?BI?SPI
+                    0020H.3   0000H.5                *** GAP ***
+            DATA    0021H     002FH     UNIT         ?DT?SPI
+            IDATA   0050H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     003DH                  *** GAP ***
+            CODE    004BH     0003H     ABSOLUTE     
+                    004EH     07B2H                  *** GAP ***
+            CODE    0800H     0548H     UNIT         ?C?LIB_CODE
+            CODE    0D48H     0153H     UNIT         ?PR?TIMER0_ISR?SPI
+            CODE    0E9BH     0098H     UNIT         ?PR?MAIN?SPI
+            CODE    0F33H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0FBFH     0040H     UNIT         ?C_INITSEG
+            CODE    0FFFH     0031H     UNIT         ?PR?_SDELAY?SPI
+            CODE    1030H     0030H     UNIT         ?PR?_LCD_STRINGWRITE?SPI
+            CODE    1060H     0024H     UNIT         ?PR?_LCD_DATAWRITE?SPI
+            CODE    1084H     0021H     UNIT         ?PR?_DELAY_MS?SPI
+            CODE    10A5H     001CH     UNIT         ?PR?IT_SPI?SPI
+            CODE    10C1H     001BH     UNIT         ?PR?LCD_INIT?SPI
+            CODE    10DCH     001AH     UNIT         ?PR?SPI_INIT?SPI
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/24/2018  17:36:19  PAGE 2
+
+
+            CODE    10F6H     0016H     UNIT         ?PR?_LCD_CMDWRITE?SPI
+            CODE    110CH     0011H     UNIT         ?PR?LCD_READY?SPI
+            CODE    111DH     000EH     UNIT         ?PR?TIMER_INIT?SPI
+            CODE    112BH     000DH     UNIT         ?CO?SPI
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\spi (?C_STARTUP)
+
+
+SEGMENT                            DATA_GROUP 
+  +--> CALLED SEGMENT            START    LENGTH
+------------------------------------------------
+?C_C51STARTUP                    -----    -----
+  +--> ?PR?MAIN?SPI
+  +--> ?C_INITSEG
+
+?PR?MAIN?SPI                     0008H    000DH
+  +--> ?CO?SPI
+  +--> ?PR?SPI_INIT?SPI
+  +--> ?PR?LCD_INIT?SPI
+  +--> ?PR?TIMER_INIT?SPI
+  +--> ?PR?_DELAY_MS?SPI
+  +--> ?PR?_LCD_CMDWRITE?SPI
+  +--> ?PR?_LCD_STRINGWRITE?SPI
+
+?PR?LCD_INIT?SPI                 -----    -----
+  +--> ?PR?_SDELAY?SPI
+  +--> ?PR?_LCD_CMDWRITE?SPI
+
+?PR?_LCD_CMDWRITE?SPI            001AH    0001H
+  +--> ?PR?LCD_READY?SPI
+  +--> ?PR?_SDELAY?SPI
+
+?PR?LCD_READY?SPI                -----    -----
+  +--> ?PR?_SDELAY?SPI
+
+?PR?_LCD_STRINGWRITE?SPI         0015H    0004H
+  +--> ?PR?_LCD_DATAWRITE?SPI
+
+?PR?_LCD_DATAWRITE?SPI           001AH    0001H
+  +--> ?PR?LCD_READY?SPI
+  +--> ?PR?_SDELAY?SPI
+
+*** NEW ROOT ***************************************************
+
+?PR?TIMER0_ISR?SPI               -----    -----
+  +--> ?PR?_LCD_CMDWRITE?SPI
+  +--> ?PR?_LCD_DATAWRITE?SPI
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\spi (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/24/2018  17:36:19  PAGE 3
+
+
+  -------         MODULE        ?C_STARTUP
+  C:0F33H         SEGMENT       ?C_C51STARTUP
+  I:0050H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0F36H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0F33H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0F33H         LINE#         133
+  C:0F35H         LINE#         134
+  C:0F36H         LINE#         135
+  C:0F37H         LINE#         136
+  C:0F39H         LINE#         185
+  C:0F3CH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        SPI
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0021H         PUBLIC        serial_data
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00C0H         PUBLIC        P4
+  D:00C3H         PUBLIC        SPCON
+  C:1007H         PUBLIC        _sdelay
+  B:00A8H.7       PUBLIC        EA
+  D:0022H         PUBLIC        tempadcVal
+  B:0080H.2       PUBLIC        LCD_en
+  D:00C4H         PUBLIC        SPSTA
+  D:00A8H         PUBLIC        IEN0
+  D:00B1H         PUBLIC        IEN1
+  D:0026H         PUBLIC        try0
+  D:00B8H         PUBLIC        IPL0
+  B:0080H.0       PUBLIC        LCD_rs
+  B:0020H.0       PUBLIC        transmit_completed
+  B:0080H.1       PUBLIC        LCD_rw
+  D:002AH         PUBLIC        result
+  C:0D48H         PUBLIC        timer0_ISR
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/24/2018  17:36:19  PAGE 4
+
+
+  D:00D8H         PUBLIC        CCON
+  C:0E9BH         PUBLIC        main
+  B:0020H.1       PUBLIC        offset_null
+  C:10A5H         PUBLIC        it_SPI
+  D:002EH         PUBLIC        count
+  C:110CH         PUBLIC        LCD_Ready
+  D:002FH         PUBLIC        data_save_high
+  D:0098H         PUBLIC        SCON
+  D:0030H         PUBLIC        temp_flag
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:0031H         PUBLIC        temp_high
+  C:1030H         PUBLIC        _LCD_StringWrite
+  C:106EH         PUBLIC        _LCD_DataWrite
+  C:112BH         SYMBOL        _?ix1000
+  C:1135H         SYMBOL        _?ix1001
+  B:00A8H.1       PUBLIC        ET0
+  C:10C1H         PUBLIC        LCD_Init
+  B:0088H.5       PUBLIC        TF0
+  B:0090H.4       PUBLIC        CS_BAR
+  D:008CH         PUBLIC        TH0
+  D:0035H         PUBLIC        adcVal
+  D:008AH         PUBLIC        TL0
+  C:1084H         PUBLIC        _delay_ms
+  D:0039H         PUBLIC        sum
+  B:0088H.4       PUBLIC        TR0
+  D:00F8H         PUBLIC        UEPINT
+  C:10F6H         PUBLIC        _LCD_CmdWrite
+  D:003DH         PUBLIC        c
+  D:003EH         PUBLIC        data_save_low
+  C:10DCH         PUBLIC        SPI_Init
+  D:003FH         PUBLIC        avgVal
+  D:00C8H         PUBLIC        T2CON
+  D:0043H         PUBLIC        i
+  B:0020H.2       PUBLIC        roundoff
+  D:0044H         PUBLIC        temp_low
+  D:0048H         PUBLIC        fweight
+  D:004CH         PUBLIC        voltage
+  C:111DH         PUBLIC        Timer_Init
+  D:00C5H         PUBLIC        SPDAT
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        mystring1
+  D:0012H         SYMBOL        mystring2
+  -------         ENDDO         
+  C:0E9BH         LINE#         52
+  C:0E9BH         LINE#         53
+  C:0E9BH         LINE#         54
+  C:0EAEH         LINE#         55
+  C:0EC1H         LINE#         56
+  C:0EC3H         LINE#         57
+  C:0EC6H         LINE#         58
+  C:0EC9H         LINE#         59
+  C:0ECCH         LINE#         60
+  C:0ECFH         LINE#         61
+  C:0ED6H         LINE#         62
+  C:0EDBH         LINE#         63
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/24/2018  17:36:19  PAGE 5
+
+
+  C:0EE6H         LINE#         64
+  C:0EEBH         LINE#         65
+  C:0EF6H         LINE#         67
+  C:0EF6H         LINE#         68
+  C:0EF6H         LINE#         69
+  C:0EF8H         LINE#         70
+  C:0EFBH         LINE#         71
+  C:0EFEH         LINE#         72
+  C:0F01H         LINE#         73
+  C:0F03H         LINE#         74
+  C:0F06H         LINE#         75
+  C:0F09H         LINE#         76
+  C:0F0CH         LINE#         77
+  C:0F0EH         LINE#         78
+  C:0F10H         LINE#         79
+  C:0F31H         LINE#         80
+  -------         ENDPROC       MAIN
+  -------         PROC          IT_SPI
+  C:10A5H         LINE#         87
+  C:10AEH         LINE#         89
+  C:10B5H         LINE#         90
+  C:10B5H         LINE#         91
+  C:10B5H         LINE#         92
+  C:10B8H         LINE#         93
+  C:10BAH         LINE#         94
+  C:10BAH         LINE#         96
+  C:10BAH         LINE#         98
+  C:10BAH         LINE#         100
+  C:10BAH         LINE#         101
+  C:10BAH         LINE#         102
+  C:10BAH         LINE#         103
+  -------         ENDPROC       IT_SPI
+  -------         PROC          TIMER0_ISR
+  C:0D48H         LINE#         105
+  C:0D65H         LINE#         111
+  C:0D68H         LINE#         112
+  C:0D6BH         LINE#         113
+  C:0D71H         LINE#         114
+  C:0D73H         LINE#         115
+  C:0D8BH         LINE#         116
+  C:0D94H         LINE#         117
+  C:0DAEH         LINE#         118
+  C:0DC8H         LINE#         119
+  C:0DF7H         LINE#         121
+  C:0DFCH         LINE#         123
+  C:0E0BH         LINE#         124
+  C:0E0EH         LINE#         125
+  C:0E30H         LINE#         126
+  C:0E32H         LINE#         127
+  C:0E35H         LINE#         128
+  C:0E56H         LINE#         129
+  C:0E58H         LINE#         130
+  C:0E5BH         LINE#         131
+  C:0E6EH         LINE#         132
+  C:0E71H         LINE#         134
+  C:0E74H         LINE#         135
+  C:0E80H         LINE#         136
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/24/2018  17:36:19  PAGE 6
+
+
+  C:0E80H         LINE#         139
+  -------         ENDPROC       TIMER0_ISR
+  -------         PROC          SPI_INIT
+  C:10DCH         LINE#         148
+  C:10DCH         LINE#         149
+  C:10DCH         LINE#         150
+  C:10DEH         LINE#         151
+  C:10E1H         LINE#         152
+  C:10E4H         LINE#         153
+  C:10E7H         LINE#         154
+  C:10EAH         LINE#         155
+  C:10EDH         LINE#         156
+  C:10F0H         LINE#         157
+  C:10F2H         LINE#         158
+  C:10F5H         LINE#         161
+  -------         ENDPROC       SPI_INIT
+  -------         PROC          TIMER_INIT
+  C:111DH         LINE#         163
+  C:111DH         LINE#         164
+  C:111DH         LINE#         175
+  C:1120H         LINE#         176
+  C:1123H         LINE#         177
+  C:1126H         LINE#         178
+  C:1128H         LINE#         179
+  C:112AH         LINE#         180
+  -------         ENDPROC       TIMER_INIT
+  -------         PROC          LCD_INIT
+  C:10C1H         LINE#         186
+  C:10C1H         LINE#         187
+  C:10C1H         LINE#         188
+  C:10C8H         LINE#         189
+  C:10CDH         LINE#         190
+  C:10D2H         LINE#         191
+  C:10D7H         LINE#         192
+  -------         ENDPROC       LCD_INIT
+  -------         PROC          _LCD_CMDWRITE
+  D:001AH         SYMBOL        cmd
+  C:10F6H         LINE#         200
+  C:10F8H         LINE#         201
+  C:10F8H         LINE#         202
+  C:10FBH         LINE#         203
+  C:10FEH         LINE#         204
+  C:1100H         LINE#         205
+  C:1100H         LINE#         206
+  C:1100H         LINE#         207
+  C:1103H         LINE#         208
+  C:1105H         LINE#         209
+  -------         ENDPROC       _LCD_CMDWRITE
+  C:1064H         SYMBOL        L?0040
+  C:1067H         SYMBOL        L?0041
+  -------         PROC          L?0039
+  -------         ENDPROC       L?0039
+  C:1064H         SYMBOL        L?0040
+  C:1067H         SYMBOL        L?0041
+  -------         PROC          _LCD_DATAWRITE
+  D:001AH         SYMBOL        dat
+  C:106EH         LINE#         217
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/24/2018  17:36:19  PAGE 7
+
+
+  C:1070H         LINE#         218
+  C:1070H         LINE#         219
+  C:1073H         LINE#         220
+  C:1076H         LINE#         221
+  C:1078H         LINE#         222
+  C:1078H         LINE#         223
+  C:1078H         LINE#         224
+  C:107BH         LINE#         225
+  C:107DH         LINE#         226
+  -------         ENDPROC       _LCD_DATAWRITE
+  -------         PROC          _LCD_STRINGWRITE
+  D:0015H         SYMBOL        str
+  D:0018H         SYMBOL        length
+  C:1030H         LINE#         234
+  C:1038H         LINE#         235
+  C:1038H         LINE#         236
+  C:1043H         LINE#         237
+  C:1043H         LINE#         238
+  C:1050H         LINE#         239
+  C:105BH         LINE#         240
+  C:105DH         LINE#         241
+  C:105FH         LINE#         242
+  -------         ENDPROC       _LCD_STRINGWRITE
+  -------         PROC          LCD_READY
+  C:110CH         LINE#         249
+  C:110CH         LINE#         250
+  C:110CH         LINE#         251
+  C:110FH         LINE#         252
+  C:1111H         LINE#         253
+  C:1113H         LINE#         254
+  C:1115H         LINE#         255
+  C:1118H         LINE#         256
+  C:111AH         LINE#         262
+  C:111CH         LINE#         263
+  -------         ENDPROC       LCD_READY
+  C:1003H         SYMBOL        L?0043
+  -------         PROC          L?0042
+  -------         ENDPROC       L?0042
+  C:1003H         SYMBOL        L?0043
+  -------         PROC          _SDELAY
+  D:0006H         SYMBOL        delay
+  -------         DO            
+  D:0005H         SYMBOL        d
+  -------         ENDDO         
+  C:1007H         LINE#         270
+  C:1007H         LINE#         271
+  C:1007H         LINE#         272
+  C:1007H         LINE#         273
+  C:1012H         LINE#         274
+  C:1012H         LINE#         275
+  C:1028H         LINE#         276
+  C:102DH         LINE#         277
+  C:102FH         LINE#         278
+  -------         ENDPROC       _SDELAY
+  -------         PROC          _DELAY_MS
+  D:0006H         SYMBOL        delay
+  -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/24/2018  17:36:19  PAGE 8
+
+
+  D:0004H         SYMBOL        d
+  -------         ENDDO         
+  C:1084H         LINE#         285
+  C:1084H         LINE#         286
+  C:1084H         LINE#         287
+  C:1084H         LINE#         288
+  C:108FH         LINE#         289
+  C:108FH         LINE#         290
+  C:109DH         LINE#         291
+  C:10A2H         LINE#         292
+  C:10A4H         LINE#         293
+  -------         ENDPROC       _DELAY_MS
+  -------         ENDMOD        SPI
+
+  -------         MODULE        ?C?FPADD
+  C:0807H         PUBLIC        ?C?FPADD
+  C:0803H         PUBLIC        ?C?FPSUB
+  -------         ENDMOD        ?C?FPADD
+
+  -------         MODULE        ?C?FPMUL
+  C:08F8H         PUBLIC        ?C?FPMUL
+  -------         ENDMOD        ?C?FPMUL
+
+  -------         MODULE        ?C?FPDIV
+  C:0A01H         PUBLIC        ?C?FPDIV
+  -------         ENDMOD        ?C?FPDIV
+
+  -------         MODULE        ?C?FCAST
+  C:0AA8H         PUBLIC        ?C?FCASTC
+  C:0AA3H         PUBLIC        ?C?FCASTI
+  C:0A9EH         PUBLIC        ?C?FCASTL
+  -------         ENDMOD        ?C?FCAST
+
+  -------         MODULE        ?C?CASTF
+  C:0ADCH         PUBLIC        ?C?CASTF
+  -------         ENDMOD        ?C?CASTF
+
+  -------         MODULE        ?C?COPY
+  C:0C2DH         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+  -------         MODULE        ?C?CLDPTR
+  C:0C53H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?ULDIV
+  C:0CA8H         PUBLIC        ?C?ULDIV
+  -------         ENDMOD        ?C?ULDIV
+
+  -------         MODULE        ?C?LNEG
+  C:0D3AH         PUBLIC        ?C?LNEG
+  -------         ENDMOD        ?C?LNEG
+
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_LCD_CMDWRITE?SPI
+    CALLER1: ?C_C51STARTUP
+    CALLER2: ?PR?TIMER0_ISR?SPI
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/24/2018  17:36:19  PAGE 9
+
+
+
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?_LCD_DATAWRITE?SPI
+    CALLER1: ?C_C51STARTUP
+    CALLER2: ?PR?TIMER0_ISR?SPI
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0378H BYTE (43%) *
+******************************************************************************
+
+Program Size: data=75.3 xdata=0 code=2369
+LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)

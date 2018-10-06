@@ -1,0 +1,77 @@
+A51 MACRO ASSEMBLER  HW3                                                                  08/26/2018 00:06:55 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\hw3.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE hw3.asm SET(SMALL) DEBUG PRINT(.\Listings\hw3.lst) OBJECT(.\Objects\hw3
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00h
+0000 020023            2     ljmp main
+                       3     
+0003                   4     load_timer:
+0003 7982              5     mov r1,#82h
+0005 C3                6     clr c
+0006 E4                7     clr a
+0007 97                8     subb a,@r1
+0008 F58A              9     mov tl0,a
+000A E4               10     clr a
+000B 7981             11     mov r1,#81h
+000D 97               12     subb a,@r1
+000E F58C             13     mov th0,a
+0010 22               14     ret
+                      15     
+0011                  16     start_count:
+0011 1103             17     acall load_timer
+0013 D28C             18     setb tr0
+0015 308DFD           19     loop: jnb tf0,loop
+0018 C28C             20     clr tr0
+001A C28D             21     clr tf0
+001C 22               22     ret
+                      23     
+                      24     
+001D                  25     delay:
+001D 120011           26     lcall start_count
+                      27     
+0020 B283             28     cpl p0.3
+0022 22               29     ret 
+                      30     
+0023                  31     main:
+0023 C283             32     clr p0.3
+0025 7981             33     mov r1,#81h
+0027 7710             34     mov @r1,#10h
+0029 7982             35     mov r1,#82h
+002B 7747             36     mov @r1,#47h
+002D 758901           37     mov TMOD ,#01H
+0030 12001D           38     again: lcall delay
+0033 80FB             39     sjmp again
+                      40     
+                      41     end
+A51 MACRO ASSEMBLER  HW3                                                                  08/26/2018 00:06:55 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   0030H   A   
+DELAY. . . . . . .  C ADDR   001DH   A   
+LOAD_TIMER . . . .  C ADDR   0003H   A   
+LOOP . . . . . . .  C ADDR   0015H   A   
+MAIN . . . . . . .  C ADDR   0023H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+START_COUNT. . . .  C ADDR   0011H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

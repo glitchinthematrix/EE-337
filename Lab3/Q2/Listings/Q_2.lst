@@ -1,0 +1,121 @@
+A51 MACRO ASSEMBLER  Q_2                                                                  08/13/2018 15:04:24 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Q_2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Q_2.asm SET(SMALL) DEBUG PRINT(.\Listings\Q_2.lst) OBJECT(.\Objects\Q_2
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;------
+                       2     ;Author: Bhishma Dedhia
+                       3     ;Name: Binary to gray and gray to binary
+                       4     ;-----
+  0093                 5     STATUS EQU P1.3
+  0092                 6     POS3 EQU P1.2
+  0091                 7     POS2 EQU P1.1
+  0090                 8     POS1 EQU P1.0
+  0094                 9     LED1 EQU P1.4
+  0095                10     LED2 EQU P1.5
+  0096                11     LED3 EQU P1.6
+                      12     ;-----  
+0000                  13     ORG 00H
+0000 0200A5           14     LJMP MAIN
+                      15     ;-------------
+0050                  16     ORG 50H
+0050                  17             GRAY2BINARY:
+0050 A292             18                     MOV C,POS3
+0052 9296             19                     MOV LED3,C
+0054 E4               20                     CLR A
+0055 3400             21                     ADDC A,#0
+0057 F520             22                     MOV 20H,A
+0059 A291             23                     MOV C,POS2
+005B E4               24                     CLR A
+005C 3400             25                     ADDC A,#0
+005E 6520             26                     XRL A,20H
+0060 F520             27                     MOV 20H,A
+0062 A200             28                     MOV C,00H
+0064 9295             29                     MOV LED2,C
+0066 E4               30                     CLR A
+0067 3400             31                     ADDC A,#0
+0069 F520             32                     MOV 20H,A
+006B A290             33                     MOV C,POS1
+006D E4               34                     CLR A
+006E 3400             35                     ADDC A,#0
+0070 6520             36                     XRL A,20H
+0072 F520             37                     MOV 20H,A
+0074 A200             38                     MOV C,00H
+0076 9294             39                     MOV LED1,C
+0078 22               40                     RET
+                      41     ;-------------
+0079                  42             BINARY2GRAY:
+0079 A292             43                     MOV C,POS3
+007B 9296             44                     MOV LED3,C
+007D E4               45                     CLR A
+007E 3400             46                     ADDC A,#0
+0080 F520             47                     MOV 20H,A
+0082 A291             48                     MOV C,POS2
+0084 E4               49                     CLR A
+0085 3400             50                     ADDC A,#0
+0087 6520             51                     XRL A,20H
+0089 F520             52                     MOV 20H,A
+008B A200             53                     MOV C ,00H
+008D 9295             54                     MOV LED2,C
+008F E4               55                     CLR A
+0090 A290             56                     MOV C,POS1
+0092 E4               57                     CLR A
+A51 MACRO ASSEMBLER  Q_2                                                                  08/13/2018 15:04:24 PAGE     2
+
+0093 3400             58                     ADDC A,#0
+0095 F540             59                     MOV 40H,A
+0097 A291             60                     MOV C,POS2
+0099 E4               61                     CLR A
+009A 3400             62                     ADDC A,#0
+009C 6540             63                     XRL A,40H
+009E F520             64                     MOV 20H,A
+00A0 A200             65                     MOV C ,00H
+00A2 9294             66                     MOV LED1,C
+00A4 22               67                     RET
+                      68     ;-------------
+                      69     
+00A5                  70             MAIN:
+                      71                     ;SETB P1.3
+                      72                     ;SETB P1.2
+                      73                     ;SETB P1.1
+                      74                     ;SETB P1.0
+00A5 C297             75                     CLR P1.7
+00A7 309305           76                     JNB STATUS,B2G
+00AA 120050           77                     LCALL GRAY2BINARY
+00AD 80F6             78                     SJMP MAIN
+00AF                  79                     B2G:
+00AF 120079           80                     LCALL BINARY2GRAY
+00B2 80F1             81                     SJMP MAIN
+                      82             
+                      83             END
+A51 MACRO ASSEMBLER  Q_2                                                                  08/13/2018 15:04:24 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B2G. . . . . . . .  C ADDR   00AFH   A   
+BINARY2GRAY. . . .  C ADDR   0079H   A   
+GRAY2BINARY. . . .  C ADDR   0050H   A   
+LED1 . . . . . . .  B ADDR   0090H.4 A   
+LED2 . . . . . . .  B ADDR   0090H.5 A   
+LED3 . . . . . . .  B ADDR   0090H.6 A   
+MAIN . . . . . . .  C ADDR   00A5H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+POS1 . . . . . . .  B ADDR   0090H.0 A   
+POS2 . . . . . . .  B ADDR   0090H.1 A   
+POS3 . . . . . . .  B ADDR   0090H.2 A   
+STATUS . . . . . .  B ADDR   0090H.3 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

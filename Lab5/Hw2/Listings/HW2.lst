@@ -1,0 +1,81 @@
+A51 MACRO ASSEMBLER  HW2                                                                  08/25/2018 23:51:21 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\HW2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE HW2.asm SET(SMALL) DEBUG PRINT(.\Listings\HW2.lst) OBJECT(.\Objects\HW2
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 00h
+0000 020027            2     ljmp main
+                       3     
+0003                   4     load_timer:
+0003 7982              5     mov r1,#82h
+0005 C3                6     clr c
+0006 E4                7     clr a
+0007 97                8     subb a,@r1
+0008 F58A              9     mov tl0,a
+000A E4               10     clr a
+000B 7981             11     mov r1,#81h
+000D 97               12     subb a,@r1
+000E F58C             13     mov th0,a
+0010 22               14     ret
+                      15     
+0011                  16     start_count:
+0011 1103             17     acall load_timer
+0013 D28C             18     setb tr0
+0015 308DFD           19     loop: jnb tf0,loop
+0018 C28C             20     clr tr0
+001A C28D             21     clr tf0
+001C 22               22     ret
+                      23     
+                      24     
+001D                  25     delay:
+                      26     
+001D 7A64             27     mov r2,#100
+001F 120011           28     repeat:lcall start_count
+0022 DAFB             29                     djnz r2,repeat
+0024 B297             30     cpl p1.7
+0026 22               31     ret 
+                      32     
+0027                  33     main:
+0027 759000           34     mov p1,#00h
+002A C297             35     clr p1.7
+002C 7981             36     mov r1,#81h
+002E 774E             37     mov @r1,#4eh
+0030 7982             38     mov r1,#82h
+0032 7720             39     mov @r1,#20h
+0034 758901           40     mov TMOD ,#01H
+0037 12001D           41     again: lcall delay
+003A 80FB             42     sjmp again
+                      43     
+                      44     end
+A51 MACRO ASSEMBLER  HW2                                                                  08/25/2018 23:51:21 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AGAIN. . . . . . .  C ADDR   0037H   A   
+DELAY. . . . . . .  C ADDR   001DH   A   
+LOAD_TIMER . . . .  C ADDR   0003H   A   
+LOOP . . . . . . .  C ADDR   0015H   A   
+MAIN . . . . . . .  C ADDR   0027H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+REPEAT . . . . . .  C ADDR   001FH   A   
+START_COUNT. . . .  C ADDR   0011H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

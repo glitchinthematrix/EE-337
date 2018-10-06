@@ -1,0 +1,101 @@
+A51 MACRO ASSEMBLER  Q_1                                                                  08/13/2018 13:12:38 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Q_1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Q_1.asm SET(SMALL) DEBUG PRINT(.\Listings\Q_1.lst) OBJECT(.\Objects\Q_1
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;--------
+                       2     ;Author: BHISHMA DEDHIA
+                       3     ;NAME: LED TOGGLE
+                       4     ;--------
+                       5     
+  0097                 6     LED1 equ P1.7
+  0096                 7     LED2 equ P1.6
+  0095                 8     LED3 equ P1.5
+                       9     
+0000                  10     ORG 00H
+0000 020050           11     LJMP MAIN
+                      12     ;------------
+0050                  13     ORG 50H
+0050                  14             MAIN:
+0050 7404             15             MOV A,#4
+0052 75F002           16             MOV B,#2
+0055 84               17             DIV AB
+0056 F54F             18             MOV 4FH,A
+0058 C294             19             CLR P1.4
+005A                  20             LOOP:
+005A D297             21                     SETB LED1
+005C D296             22                     SETB LED2
+005E D295             23                     SETB LED3
+0060 120090           24                     LCALL DELAY
+0063 C295             25                     CLR LED3
+0065 120090           26                     LCALL DELAY
+0068 D295             27                     SETB LED3
+006A C296             28                     CLR LED2
+006C 120090           29                     LCALL DELAY
+006F C295             30                     CLR LED3
+0071 120090           31                     LCALL DELAY
+0074 D295             32                     SETB LED3
+0076 D296             33                     SETB LED2
+0078 C297             34                     CLR LED1
+007A 120090           35                     LCALL DELAY
+007D C295             36                     CLR LED3
+007F 120090           37                     LCALL DELAY
+0082 D295             38                     SETB LED3
+0084 C296             39                     CLR LED2
+0086 120090           40                     LCALL DELAY
+0089 C295             41                     CLR LED3
+008B 120090           42                     LCALL DELAY
+008E 80CA             43                     SJMP LOOP
+                      44     ;------------   
+                      45             
+0090                  46             DELAY: 
+0090 D2D5             47             SETB PSW.5
+0092 AB4F             48                        MOV R3, 4FH
+0094                  49             BACK3: 
+0094 7C0A             50                        MOV R4, #10
+0096                  51             BACK2:     
+0096 7DC8             52                        MOV R5,#200
+0098                  53             BACK1:
+0098 79FF             54                        MOV R1,#0FFH
+009A                  55             BACK:
+009A D9FE             56                        DJNZ R1, BACK
+009C DDFA             57                        DJNZ R5, BACK1
+A51 MACRO ASSEMBLER  Q_1                                                                  08/13/2018 13:12:38 PAGE     2
+
+009E DCF6             58                        DJNZ R4, BACK2
+00A0 DBF2             59                        DJNZ R3, BACK3
+00A2 C2D5             60                        CLR PSW.5
+00A4 22               61                RET
+                      62     END
+A51 MACRO ASSEMBLER  Q_1                                                                  08/13/2018 13:12:38 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+BACK . . . . . . .  C ADDR   009AH   A   
+BACK1. . . . . . .  C ADDR   0098H   A   
+BACK2. . . . . . .  C ADDR   0096H   A   
+BACK3. . . . . . .  C ADDR   0094H   A   
+DELAY. . . . . . .  C ADDR   0090H   A   
+LED1 . . . . . . .  B ADDR   0090H.7 A   
+LED2 . . . . . . .  B ADDR   0090H.6 A   
+LED3 . . . . . . .  B ADDR   0090H.5 A   
+LOOP . . . . . . .  C ADDR   005AH   A   
+MAIN . . . . . . .  C ADDR   0050H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
