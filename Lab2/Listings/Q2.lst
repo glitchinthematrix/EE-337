@@ -1,0 +1,77 @@
+A51 MACRO ASSEMBLER  Q2                                                                   08/04/2018 23:36:12 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Q2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Q2.asm SET(SMALL) DEBUG PRINT(.\Listings\Q2.lst) OBJECT(.\Objects\Q2.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;-------------
+                       2     ;Code: LED blink
+                       3     ;Author: Bhishma Dedhia
+                       4     ;-------------
+                       5     
+                       6     ;-------------
+  0097                 7     LED EQU P1.7
+                       8     
+0000                   9             ORG 00H
+0000 020065           10             LJMP MAIN
+                      11     ;-------------
+                      12     
+0050                  13             ORG 50H
+                      14                     
+0050 D2D5             15     DELAY: SETB PSW.5
+0052 AB4F             16                MOV R3, 4FH
+0054                  17     BACK3: 
+0054 7C0A             18                MOV R4, #10
+0056                  19     BACK2:     
+0056 7DC8             20                MOV R5,#200
+0058                  21     BACK1:
+0058 79FF             22                MOV R1,#0FFH
+005A                  23     BACK:
+005A D9FE             24                DJNZ R1, BACK
+005C DDFA             25                DJNZ R5, BACK1
+005E DCF6             26                DJNZ R4, BACK2
+0060 DBF2             27                DJNZ R3, BACK3
+0062 C2D5             28                CLR PSW.5
+0064 22               29                RET
+                      30             
+                      31     ;-------------
+0065                  32     MAIN:
+0065 754F0F           33                     MOV 4FH, #15
+0068 7581CF           34                     MOV SP, #0CFH
+006B                  35     LOOP:   
+006B D297             36                     SETB LED
+006D 120050           37                     LCALL DELAY
+0070 C297             38                     CLR LED
+0072 120050           39                     LCALL DELAY
+0075 80F4             40                     SJMP LOOP
+                      41     END             
+                                     
+A51 MACRO ASSEMBLER  Q2                                                                   08/04/2018 23:36:12 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BACK . . . . . . .  C ADDR   005AH   A   
+BACK1. . . . . . .  C ADDR   0058H   A   
+BACK2. . . . . . .  C ADDR   0056H   A   
+BACK3. . . . . . .  C ADDR   0054H   A   
+DELAY. . . . . . .  C ADDR   0050H   A   
+LED. . . . . . . .  B ADDR   0090H.7 A   
+LOOP . . . . . . .  C ADDR   006BH   A   
+MAIN . . . . . . .  C ADDR   0065H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

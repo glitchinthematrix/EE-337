@@ -1,0 +1,3 @@
+".\Objects\16_bit_subtraction.obj" 
+TO ".\Objects\Homework1.1" 
+PRINT(".\Listings\Homework1.m51") RAMSIZE(256) 

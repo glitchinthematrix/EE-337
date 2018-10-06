@@ -1,0 +1,215 @@
+A51 MACRO ASSEMBLER  Q_BONUS                                                              08/07/2018 11:19:35 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Q_bonus.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Q_bonus.asm SET(SMALL) DEBUG PRINT(.\Listings\Q_bonus.lst) OBJECT(.\Obj
+                      ects\Q_bonus.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0090                 1     LED EQU P1
+0000                   2     ORG 00H
+0000 020100            3     LJMP MAIN
+0100                   4     ORG 100H
+0100                   5     MAIN:
+0100 7581CF            6             MOV SP,#0CFH;-----------------------Initialize STACK POINTER
+0103 755008            7             MOV 50H,#8;------------------------No of memory locations of Array A
+0106 755158            8             MOV 51H,#58H;------------------------Array A start location
+0109 120161            9             LCALL zeroOut;----------------------Clear memory
+010C 755008           10             MOV 50H,#8;------------------------No of memory locations of Array B
+010F 755170           11             MOV 51H,#70H;------------------------Array B start location
+0112 120161           12             LCALL zeroOut;----------------------Clear memory
+0115 755004           13             MOV 50H,#4;------------------------No of memory locations of source array
+0118 755153           14             MOV 51H,#53H;------------------------Source array start location
+011B 755258           15             MOV 52H,#58H;------------------------Destination array(A) start location
+011E 12016F           16             LCALL bin2ascii;--------------------Write at memory location
+0121 755008           17             MOV 50H,#8;------------------------No of elements of Array A to be copied in Array B
+0124 755158           18             MOV 51H,#58H;------------------------Array A start location
+0127 755270           19             MOV 52H,#70H;------------------------Array B start location
+012A 1201AC           20             LCALL memcpy;-----------------------Copy block of memory to other location
+012D 755008           21             MOV 50H,#8;------------------------No of memory locations of Array B
+0130 755170           22             MOV 51H,#70H;------------------------Array B start location
+0133 754F02           23             MOV 4FH,#2;------------------------User defined delay value
+0136 12013B           24             LCALL display;----------------------Display the last four bits of elements on LEDs
+0139 80FE             25             here:SJMP here;---------------------WHILE loop(Infinite Loop)
+                      26     ;----------------------------
+013B                  27     display:
+013B AA50             28                     MOV R2,50H
+013D A851             29                     MOV R0,51H
+013F                  30             START1:
+013F E6               31                     MOV A,@R0
+0140 54F0             32                     ANL A,#0F0H
+0142 F590             33                     MOV LED,A
+0144 12014C           34                     LCALL DELAY
+0147 08               35                     INC R0
+0148 DAF5             36                     DJNZ R2,START1
+014A 80FE             37             STOP: SJMP STOP
+014C                  38             DELAY:
+014C D2D5             39                     SETB PSW.5
+014E AB4F             40                     MOV R3, 4FH
+0150                  41                     BACK3: 
+0150 7C0A             42                                MOV R4, #10
+0152                  43                     BACK2:     
+0152 7DC8             44                                MOV R5,#200
+0154                  45                     BACK1:
+0154 79FF             46                                MOV R1,#0FFH
+0156                  47                     BACK:
+0156 D9FE             48                                DJNZ R1, BACK
+0158 DDFA             49                                DJNZ R5, BACK1
+015A DCF6             50                                DJNZ R4, BACK2
+015C DBF2             51                                DJNZ R3, BACK3
+015E C2D5             52                                CLR PSW.5
+0160 22               53                     RET
+                      54     ;---------------------------
+0161                  55     zeroOut:
+0161 D2D5             56             SETB PSW.5
+0163 A851             57             MOV R0,51H
+A51 MACRO ASSEMBLER  Q_BONUS                                                              08/07/2018 11:19:35 PAGE     2
+
+0165 AA50             58             MOV R2,50H
+0167                  59             START:
+0167 7600             60             MOV @R0,#0H
+0169 08               61             INC R0
+016A DAFB             62             DJNZ R2 ,START
+016C C2D5             63             CLR PSW.5
+016E 22               64             RET
+                      65     ;-----------------
+016F                  66     bin2ascii:
+016F AA50             67             MOV R2,50H
+0171                  68             START4:
+0171 A851             69             MOV R0, 51H
+0173 E6               70             MOV A, @R0
+0174 54F0             71             ANL A,#0F0H
+0176 C4               72             SWAP A
+0177 12018C           73             LCALL CONVERT_TO_ASCII
+017A 1201A0           74             LCALL INCREMENT_POINTER_WRITE
+017D E6               75             MOV A ,@R0
+017E 540F             76             ANL A,#0FH
+0180 12018C           77             LCALL CONVERT_TO_ASCII
+0183 1201A0           78             LCALL INCREMENT_POINTER_WRITE
+0186 1201A6           79             LCALL INCREMENT_POINTER_READ
+0189 DAE6             80             DJNZ R2,START4
+018B 22               81             RET
+                      82             
+                      83     ;----------------------   
+018C                  84             CONVERT_TO_ASCII:
+018C C3               85                 CLR C
+018D FB               86                     MOV R3,A
+018E 940A             87                     SUBB A, #0AH
+0190 4007             88                     JC NOT_A_ONWARDS;
+0192 EB               89                             MOV A,R3
+0193 2437             90                             ADD A,#37H
+0195 A952             91                             MOV R1,52H
+0197 F7               92                             MOV @R1,A
+0198 22               93                             RET
+                      94                     
+0199                  95                     NOT_A_ONWARDS:
+0199 EB               96                             MOV A,R3
+019A 2430             97                             ADD A,#30H
+019C A952             98                             MOV R1,52H
+019E F7               99                             MOV @R1,A
+019F 22              100                             RET
+                     101                     
+                     102     ;-----------------------        
+01A0                 103              INCREMENT_POINTER_WRITE:
+01A0 E552            104                     MOV A,52H
+01A2 04              105                     INC A
+01A3 F552            106                     MOV 52H,A
+01A5 22              107                     RET
+                     108     ;-----------------------
+01A6                 109              INCREMENT_POINTER_READ:
+01A6 E551            110                             MOV A,51H
+01A8 04              111                             INC A
+01A9 F551            112                             MOV 51H,A
+01AB 22              113                             RET
+01AC                 114     memcpy:
+01AC AA50            115             MOV R2,50H
+01AE A852            116             MOV R0,52H
+01B0 E551            117             MOV A,51H
+01B2 98              118             SUBB A,R0
+01B3 4004            119             JC READ_BEFORE_WRITE
+01B5 1201CF          120             LCALL SORT
+01B8 22              121             STOPm:ret
+01B9                 122             READ_BEFORE_WRITE:
+01B9 1201BE          123             LCALL SORT_BACKWARDS
+A51 MACRO ASSEMBLER  Q_BONUS                                                              08/07/2018 11:19:35 PAGE     3
+
+01BC 80FA            124             SJMP STOPm
+                     125     ;------------------     
+01BE                 126             SORT_BACKWARDS:
+01BE E551            127                     MOV A,51H
+01C0 2A              128                     ADD A, R2
+01C1 F8              129                     MOV R0,A
+01C2 18              130                     DEC R0
+01C3 E552            131                     MOV A,52H
+01C5 2A              132                     ADD A,R2
+01C6 F9              133                     MOV R1,A
+01C7 19              134                     DEC R1
+01C8                 135                     STARTm:
+01C8 E6              136                             MOV A,@R0
+01C9 F7              137                             MOV @R1,A
+01CA 18              138                             DEC R0
+01CB 19              139                             DEC R1
+01CC DAFA            140                             DJNZ R2, STARTm
+01CE 22              141                     RET
+                     142     ;------------------     
+01CF                 143             SORT:
+01CF A851            144                     MOV R0,51H
+01D1 A952            145                     MOV R1,52H
+01D3                 146                     START2:
+01D3 E6              147                             MOV A,@R0
+01D4 F7              148                             MOV @R1,A
+01D5 08              149                             INC R0
+01D6 09              150                             INC R1
+01D7 DAFA            151                             DJNZ R2, START2
+01D9 22              152                             RET
+                     153     ;-----------------       
+                     154     
+                     155     
+                     156             
+                     157     
+                     158     end                
+A51 MACRO ASSEMBLER  Q_BONUS                                                              08/07/2018 11:19:35 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E                  T Y P E  V A L U E   ATTRIBUTES
+
+BACK. . . . . . . . . .  C ADDR   0156H   A   
+BACK1 . . . . . . . . .  C ADDR   0154H   A   
+BACK2 . . . . . . . . .  C ADDR   0152H   A   
+BACK3 . . . . . . . . .  C ADDR   0150H   A   
+BIN2ASCII . . . . . . .  C ADDR   016FH   A   
+CONVERT_TO_ASCII. . . .  C ADDR   018CH   A   
+DELAY . . . . . . . . .  C ADDR   014CH   A   
+DISPLAY . . . . . . . .  C ADDR   013BH   A   
+HERE. . . . . . . . . .  C ADDR   0139H   A   
+INCREMENT_POINTER_READ.  C ADDR   01A6H   A   
+INCREMENT_POINTER_WRITE  C ADDR   01A0H   A   
+LED . . . . . . . . . .  D ADDR   0090H   A   
+MAIN. . . . . . . . . .  C ADDR   0100H   A   
+MEMCPY. . . . . . . . .  C ADDR   01ACH   A   
+NOT_A_ONWARDS . . . . .  C ADDR   0199H   A   
+P1. . . . . . . . . . .  D ADDR   0090H   A   
+PSW . . . . . . . . . .  D ADDR   00D0H   A   
+READ_BEFORE_WRITE . . .  C ADDR   01B9H   A   
+SORT. . . . . . . . . .  C ADDR   01CFH   A   
+SORT_BACKWARDS. . . . .  C ADDR   01BEH   A   
+SP. . . . . . . . . . .  D ADDR   0081H   A   
+START . . . . . . . . .  C ADDR   0167H   A   
+START1. . . . . . . . .  C ADDR   013FH   A   
+START2. . . . . . . . .  C ADDR   01D3H   A   
+START4. . . . . . . . .  C ADDR   0171H   A   
+STARTM. . . . . . . . .  C ADDR   01C8H   A   
+STOP. . . . . . . . . .  C ADDR   014AH   A   
+STOPM . . . . . . . . .  C ADDR   01B8H   A   
+ZEROOUT . . . . . . . .  C ADDR   0161H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

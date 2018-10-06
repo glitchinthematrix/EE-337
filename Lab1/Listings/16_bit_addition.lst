@@ -1,0 +1,57 @@
+A51 MACRO ASSEMBLER  16_BIT_ADDITION                                                      07/31/2018 23:52:22 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\16_bit_addition.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE 16_bit_addition.asm SET(SMALL) DEBUG PRINT(.\Listings\16_bit_addition.l
+                      st) OBJECT(.\Objects\16_bit_addition.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;-----------------------------------------
+                       2     ; CodeName : 16 bit addition
+                       3     ; Author   : Bhishma Dedhia
+                       4     ;-----------------------------------------
+0000                   5     org 0h
+0000 020100            6     LJMP MAIN
+0100                   7     org 100h
+0100                   8     MAIN:
+0100 7560FE            9             MOV 60H,#0FEH
+0103 7561BE           10             MOV 61H,#0BEH
+0106 7570FF           11             MOV 70H,#0FFH
+0109 7571FF           12             MOV 71H,#0FFH 
+010C E561             13             MOV A,61H;LSB of the first
+010E 2571             14             ADD A,71H;Adding LSB of one with the other
+0110 F564             15             MOV 64H ,A;
+0112 E4               16             CLR A; Clearing accumulator
+0113 E560             17             MOV A,60H;MSB of the first
+0115 3570             18             ADDC A,70H;Adding the MSB together
+0117 F563             19             MOV 63H,A;
+0119 F520             20             MOV 20H, A;MSB1
+011B C3               21             CLR C;
+011C 7207             22             ORL C,07H;
+011E E4               23             CLR A;
+011F 3400             24             ADDC A,#0H;
+0121 F562             25             MOV 62H,A;
+0123 80FE             26         HERE:SJMP HERE
+                      27     END     
+                                     
+                                     
+                                     
+                                     
+A51 MACRO ASSEMBLER  16_BIT_ADDITION                                                      07/31/2018 23:52:22 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0123H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

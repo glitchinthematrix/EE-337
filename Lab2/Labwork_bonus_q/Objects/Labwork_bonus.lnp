@@ -1,0 +1,3 @@
+".\Objects\Q_bonus.obj" 
+TO ".\Objects\Labwork_bonus" 
+PRINT(".\Listings\Labwork_bonus.m51") RAMSIZE(256) 

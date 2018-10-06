@@ -1,0 +1,100 @@
+A51 MACRO ASSEMBLER  Q_2                                                                  08/06/2018 16:36:56 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Q_2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Q_2.asm SET(SMALL) DEBUG PRINT(.\Listings\Q_2.lst) OBJECT(.\Objects\Q_2
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;-------------
+                       2     ;Code: Bin2ascii
+                       3     ;Author: Bhishma Dedhia
+                       4     ;-------------
+0000                   5     ORG 00H
+0000 020050            6     LJMP MAIN
+0050                   7     ORG 50H
+                       8     ;-------------
+                       9     ;bin2ascii:
+0050                  10     MAIN:
+0050 AA50             11             MOV R2,50H
+0052                  12             START:
+0052 A851             13             MOV R0, 51H
+0054 E6               14             MOV A, @R0
+0055 54F0             15             ANL A,#0F0H
+0057 C4               16             SWAP A
+0058 12006E           17             LCALL CONVERT_TO_ASCII
+005B 120082           18             LCALL INCREMENT_POINTER_WRITE
+005E E6               19             MOV A ,@R0
+005F 540F             20             ANL A,#0FH
+0061 12006E           21             LCALL CONVERT_TO_ASCII
+0064 120082           22             LCALL INCREMENT_POINTER_WRITE
+0067 120088           23             LCALL INCREMENT_POINTER_READ
+006A DAE6             24             DJNZ R2,START
+006C 80FE             25             STOP: SJMP STOP;
+                      26             
+                      27             
+                      28             
+                      29             
+                      30             
+                      31             
+                      32             
+                      33     ;----------------------   
+006E                  34             CONVERT_TO_ASCII:
+006E C3               35                 CLR C
+006F FB               36                     MOV R3,A
+0070 940A             37                     SUBB A, #0AH
+0072 4007             38                     JC NOT_A_ONWARDS;
+0074 EB               39                             MOV A,R3
+0075 2437             40                             ADD A,#37H
+0077 A952             41                             MOV R1,52H
+0079 F7               42                             MOV @R1,A
+007A 22               43                             RET
+                      44                     
+007B                  45                     NOT_A_ONWARDS:
+007B EB               46                             MOV A,R3
+007C 2430             47                             ADD A,#30H
+007E A952             48                             MOV R1,52H
+0080 F7               49                             MOV @R1,A
+0081 22               50                             RET
+                      51                     
+                      52     ;-----------------------        
+0082                  53              INCREMENT_POINTER_WRITE:
+0082 E552             54                     MOV A,52H
+0084 04               55                     INC A
+0085 F552             56                     MOV 52H,A
+0087 22               57                     RET
+A51 MACRO ASSEMBLER  Q_2                                                                  08/06/2018 16:36:56 PAGE     2
+
+                      58     ;-----------------------
+0088                  59              INCREMENT_POINTER_READ:
+0088 E551             60                             MOV A,51H
+008A 04               61                             INC A
+008B F551             62                             MOV 51H,A
+008D 22               63                             RET
+                      64     
+                      65             
+                      66     END
+                             
+A51 MACRO ASSEMBLER  Q_2                                                                  08/06/2018 16:36:56 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E                  T Y P E  V A L U E   ATTRIBUTES
+
+CONVERT_TO_ASCII. . . .  C ADDR   006EH   A   
+INCREMENT_POINTER_READ.  C ADDR   0088H   A   
+INCREMENT_POINTER_WRITE  C ADDR   0082H   A   
+MAIN. . . . . . . . . .  C ADDR   0050H   A   
+NOT_A_ONWARDS . . . . .  C ADDR   007BH   A   
+START . . . . . . . . .  C ADDR   0052H   A   
+STOP. . . . . . . . . .  C ADDR   006CH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

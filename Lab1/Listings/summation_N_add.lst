@@ -1,0 +1,59 @@
+A51 MACRO ASSEMBLER  SUMMATION_N_ADD                                                      07/30/2018 14:50:02 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\summation_N_add.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE summation_N_add.asm SET(SMALL) DEBUG PRINT(.\Listings\summation_N_add.l
+                      st) OBJECT(.\Objects\summation_N_add.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;-----------------------------------------
+                       2     ; CodeName : Summation n numbers
+                       3     ; Author   : Bhishma Dedhia
+                       4     ;-----------------------------------------
+0000                   5     org 0h
+0000 020100            6     LJMP main
+0100                   7     org 100h
+0100                   8             main:
+0100 755003            9             MOV 50H, #03
+0103 E550             10             MOV A,50H;number to be stored
+0105 7A00             11             MOV R2,#0
+0107 7850             12             MOV R0,#50H;adrress to be stored
+0109 7900             13             MOV R1,#0;
+010B 02010E           14             LJMP process
+                      15             
+010E                  16         process:
+010E FB               17             MOV R3,A
+010F E9               18             MOV A, R1
+0110 0A               19             INC R2
+0111 2A               20             ADD A, R2
+0112 08               21             INC R0
+0113 F6               22             MOV @R0 , A
+0114 F9               23             MOV R1, A
+0115 EB               24             MOV A, R3
+0116 14               25             DEC A
+0117 70F5             26             JNZ process
+0119 80FE             27             HERE:SJMP HERE
+                      28     END     
+                                     
+                                     
+                                     
+                                     
+A51 MACRO ASSEMBLER  SUMMATION_N_ADD                                                      07/30/2018 14:50:02 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0119H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+PROCESS. . . . . .  C ADDR   010EH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,84 @@
+A51 MACRO ASSEMBLER  SORTING                                                              07/31/2018 23:35:40 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\sorting.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE sorting.asm SET(SMALL) DEBUG PRINT(.\Listings\sorting.lst) OBJECT(.\Obj
+                      ects\sorting.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;-----------------------------------------
+                       2     ; CodeName : Array sorter
+                       3     ; Author   : Bhishma Dedhia
+                       4     ;-----------------------------------------
+                       5     
+0000                   6     org 0h
+0000 020100            7     LJMP MAIN
+0100                   8     org 100h
+0100                   9     MAIN:
+0100 7560FA           10             MOV 60H,#0FAH
+0103 756106           11             MOV 61H,#06H
+0106 756205           12             MOV 62H,#05H
+0109 756303           13             MOV 63H,#03H
+010C 756400           14             MOV 64H,#00H
+                      15             
+010F 7D05             16             MOV R5,#05
+0111 7860             17             MOV R0,#60H
+0113 7970             18             MOV R1,#70H
+0115                  19             HERE:
+0115 E6               20             MOV A,@R0
+0116 F7               21             MOV @R1,A
+0117 08               22             INC R0
+0118 09               23             INC R1
+0119 DDFA             24             DJNZ R5 ,HERE
+011B 7A05             25                MOV R2,#05H
+011D 1A               26                DEC R2
+011E                  27     LOOP2:  
+011E 7870             28             MOV R0,#70H
+0120 7B04             29            MOV R3,#04H
+0122 E6               30     LOOP1:  MOV A ,@R0
+0123 08               31                     INC R0
+0124 FD               32                     MOV R5,A
+0125 C3               33                     CLR C
+0126 96               34                     SUBB A,@R0
+0127 4005             35                     JC SKIP
+0129 ED               36         MOV A,R5
+012A C6               37             XCH A,@R0
+012B 18               38             DEC R0
+012C F6               39             MOV @R0,A
+012D 08               40             INC R0
+012E DBF2             41             SKIP: DJNZ R3, LOOP1
+0130 DAEC             42                   DJNZ R2,LOOP2
+0132 80FE             43        STOP: SJMP STOP
+                      44             
+                      45     END
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                                     
+                             e
+*** WARNING #A73 IN 53 (sorting.asm, LINE 53): TEXT FOUND BEYOND END STATEMENT - IGNORED
+A51 MACRO ASSEMBLER  SORTING                                                              07/31/2018 23:35:40 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0115H   A   
+LOOP1. . . . . . .  C ADDR   0122H   A   
+LOOP2. . . . . . .  C ADDR   011EH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+SKIP . . . . . . .  C ADDR   012EH   A   
+STOP . . . . . . .  C ADDR   0132H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)

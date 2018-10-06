@@ -1,0 +1,85 @@
+A51 MACRO ASSEMBLER  Q_1                                                                  08/12/2018 03:16:13 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Q_1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Q_1.asm SET(SMALL) DEBUG PRINT(.\Listings\Q_1.lst) OBJECT(.\Objects\Q_1
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;-------------
+                       2     ;Code: Show the nibble
+                       3     ;Author: Bhishma Dedhia
+                       4     ;-------------
+  0090                 5     LED EQU P1
+                       6     
+                       7     ;DISPLAY:
+0000                   8     ORG 00H
+                       9     ;----------
+0000 020050           10     LJMP MAIN
+0050                  11     ORG 50H
+0050                  12     MAIN:
+0050 7A04             13             MOV R2, #4H
+0052 755110           14             MOV 51H,#10H
+0055 755220           15             MOV 52H,#20H
+0058 755330           16             MOV 53H,#30H
+005B 755440           17             MOV 54H,#40H
+005E 754F02           18             MOV 4FH, #2
+0061 7581CF           19             MOV SP, #0CFH
+0064 AA50             20             MOV R2,50H
+0066 7851             21             MOV R0,#51H
+0068                  22     START1:
+0068 E6               23             MOV A,@R0
+0069 54F0             24             ANL A,#0F0H
+006B F590             25             MOV LED,A
+006D 120075           26             LCALL DELAY
+0070 08               27             INC R0
+0071 DAF5             28             DJNZ R2,START1
+0073 80FE             29     STOP: SJMP STOP
+                      30     ;-----------
+0075                  31     DELAY:
+0075 D2D5             32             SETB PSW.5
+0077 AB4F             33         MOV R3, 4FH
+0079                  34             BACK3: 
+0079 7C0A             35                        MOV R4, #10
+007B                  36             BACK2:     
+007B 7DC8             37                        MOV R5,#200
+007D                  38             BACK1:
+007D 79FF             39                        MOV R1,#0FFH
+007F                  40             BACK:
+007F D9FE             41                        DJNZ R1, BACK
+0081 DDFA             42                        DJNZ R5, BACK1
+0083 DCF6             43                        DJNZ R4, BACK2
+0085 DBF2             44                        DJNZ R3, BACK3
+0087 C2D5             45                        CLR PSW.5
+0089 22               46         RET
+                      47                        
+                      48     
+                      49     end
+A51 MACRO ASSEMBLER  Q_1                                                                  08/12/2018 03:16:13 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BACK . . . . . . .  C ADDR   007FH   A   
+BACK1. . . . . . .  C ADDR   007DH   A   
+BACK2. . . . . . .  C ADDR   007BH   A   
+BACK3. . . . . . .  C ADDR   0079H   A   
+DELAY. . . . . . .  C ADDR   0075H   A   
+LED. . . . . . . .  D ADDR   0090H   A   
+MAIN . . . . . . .  C ADDR   0050H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+START1 . . . . . .  C ADDR   0068H   A   
+STOP . . . . . . .  C ADDR   0073H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

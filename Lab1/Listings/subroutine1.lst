@@ -1,0 +1,45 @@
+A51 MACRO ASSEMBLER  SUBROUTINE1                                                          07/28/2018 20:15:19 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\subroutine1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE subroutine1.asm SET(SMALL) DEBUG PRINT(.\Listings\subroutine1.lst) OBJE
+                      CT(.\Objects\subroutine1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;-----------------------------------------
+                       2     ; CodeName : 8 bit adder
+                       3     ; Author   : Bhishma Dedhia
+                       4     ;-----------------------------------------
+0000                   5     org 0h
+0000 020100            6     LJMP MAIN
+0100                   7     org 100h
+0100                   8     MAIN:
+0100 75508F            9             mov 50H, #8FH
+0103 75607F           10             mov 60H, #7FH
+0106 E550             11             mov A, 50H
+0108 2560             12             add A,60H
+010A F570             13             mov 70H, A
+010C 7400             14             mov A,#0
+010E 3400             15             addc A,#0
+0110 F571             16             mov 71h, A
+                      17                                     
+0112 80FE             18     HERE:SJMP HERE
+                      19     END             
+A51 MACRO ASSEMBLER  SUBROUTINE1                                                          07/28/2018 20:15:19 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0112H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

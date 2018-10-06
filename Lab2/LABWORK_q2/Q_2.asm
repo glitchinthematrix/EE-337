@@ -1,0 +1,67 @@
+;-------------
+;Code: Bin2ascii
+;Author: Bhishma Dedhia
+;-------------
+ORG 00H
+LJMP MAIN
+ORG 50H
+;-------------
+;bin2ascii:
+MAIN:
+	MOV R2,50H
+	START:
+	MOV R0, 51H
+	MOV A, @R0
+	ANL A,#0F0H
+	SWAP A
+	LCALL CONVERT_TO_ASCII
+	LCALL INCREMENT_POINTER_WRITE
+	MOV A ,@R0
+	ANL A,#0FH
+	LCALL CONVERT_TO_ASCII
+	LCALL INCREMENT_POINTER_WRITE
+	LCALL INCREMENT_POINTER_READ
+	DJNZ R2,START
+	STOP: SJMP STOP;
+	
+	
+	
+	
+	
+	
+	
+;----------------------	  
+	CONVERT_TO_ASCII:
+	    CLR C
+		MOV R3,A
+		SUBB A, #0AH
+		JC NOT_A_ONWARDS;
+			MOV A,R3
+			ADD A,#37H
+			MOV R1,52H
+			MOV @R1,A
+			RET
+		
+		NOT_A_ONWARDS:
+			MOV A,R3
+			ADD A,#30H
+			MOV R1,52H
+			MOV @R1,A
+			RET
+		
+;-----------------------	
+	 INCREMENT_POINTER_WRITE:
+		MOV A,52H
+		INC A
+		MOV 52H,A
+		RET
+;-----------------------
+	 INCREMENT_POINTER_READ:
+			MOV A,51H
+			INC A
+			MOV 51H,A
+			RET
+
+	
+END
+

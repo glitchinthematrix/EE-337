@@ -1,0 +1,99 @@
+A51 MACRO ASSEMBLER  Q_3                                                                  08/06/2018 21:56:41 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Q_3.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Q_3.ASM SET(SMALL) DEBUG PRINT(.\Listings\Q_3.lst) OBJECT(.\Objects\Q_3
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;-------------
+                       2     ;Code: MEMORY COPY
+                       3     ;Author: Bhishma Dedhia
+                       4     ;-------------
+0000                   5     ORG 0H
+0000 020050            6     LJMP MAIN
+0050                   7     ORG 50H
+                       8     ;memcpy:
+                       9     ;-------------
+                      10     
+0050                  11     MAIN:
+0050 AA50             12             MOV R2,50H
+0052 A852             13             MOV R0,52H
+0054 E551             14             MOV A,51H
+0056 98               15             SUBB A,R0
+0057 4005             16             JC READ_BEFORE_WRITE
+0059 120074           17             LCALL SORT
+005C 80FE             18             STOP:SJMP STOP
+005E                  19             READ_BEFORE_WRITE:
+005E 120063           20             LCALL SORT_BACKWARDS
+0061 80F9             21             SJMP STOP
+                      22     ;------------------     
+0063                  23             SORT_BACKWARDS:
+0063 E551             24             MOV A,51H
+0065 2A               25             ADD A, R2
+0066 F8               26             MOV R0,A
+0067 18               27             DEC R0
+0068 E552             28             MOV A,52H
+006A 2A               29             ADD A,R2
+006B F9               30             MOV R1,A
+006C 19               31             DEC R1
+006D                  32             START1:
+006D E6               33                     MOV A,@R0
+006E F7               34                     MOV @R1,A
+006F 18               35                     DEC R0
+0070 19               36                     DEC R1
+0071 DAFA             37                     DJNZ R2, START1
+0073 22               38             RET
+                      39     ;------------------     
+0074                  40             SORT:
+0074 A851             41             MOV R0,51H
+0076 A952             42             MOV R1,52H
+0078                  43             START2:
+0078 E6               44                     MOV A,@R0
+0079 F7               45                     MOV @R1,A
+007A 08               46                     INC R0
+007B 09               47                     INC R1
+007C DAFA             48                     DJNZ R2, START2
+007E 22               49                     RET
+                      50              
+                      51                     
+                      52     END
+                                     
+                                     
+                                     
+                                     
+                                     
+A51 MACRO ASSEMBLER  Q_3                                                                  08/06/2018 21:56:41 PAGE     2
+
+                                     
+                                     
+                                             
+                                             
+                                             
+                                             
+                                     
+                                             
+                                     
+A51 MACRO ASSEMBLER  Q_3                                                                  08/06/2018 21:56:41 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+MAIN . . . . . . .  C ADDR   0050H   A   
+READ_BEFORE_WRITE.  C ADDR   005EH   A   
+SORT . . . . . . .  C ADDR   0074H   A   
+SORT_BACKWARDS . .  C ADDR   0063H   A   
+START1 . . . . . .  C ADDR   006DH   A   
+START2 . . . . . .  C ADDR   0078H   A   
+STOP . . . . . . .  C ADDR   005CH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

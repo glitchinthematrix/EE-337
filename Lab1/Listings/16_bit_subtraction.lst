@@ -1,0 +1,81 @@
+A51 MACRO ASSEMBLER  16_BIT_SUBTRACTION                                                   08/01/2018 00:01:38 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\16_bit_subtraction.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE 16_bit_subtraction.asm SET(SMALL) DEBUG PRINT(.\Listings\16_bit_subtrac
+                      tion.lst) OBJECT(.\Objects\16_bit_subtraction.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;-----------------------------------------
+                       2     ; CodeName : 16 bit subtraction
+                       3     ; Author   : Bhishma Dedhia
+                       4     ;-----------------------------------------
+0000                   5     org 0h
+0000 020100            6     LJMP MAIN
+0100                   7     org 100h
+0100                   8     MAIN:
+0100 7560FF            9             MOV 60H,#0ffH
+0103 7561FF           10             MOV 61H,#0FFH
+0106 7570FC           11             MOV 70H,#0FCH
+0109 7571DE           12             MOV 71H,#0DEH  
+010C E571             13             MOV A,71H;
+010E F4               14             CPL A;
+010F FA               15             MOV R2,A;
+0110 0A               16             INC R2;
+0111 E561             17             MOV A ,61H;
+0113 2A               18             ADD A, R2;
+0114 F564             19             MOV 64H,A;
+0116 E570             20             MOV A ,70H;
+0118 F4               21             CPL A;
+0119 FA               22             MOV R2,A;
+011A E560             23             MOV A,60H;
+011C 3A               24             ADDC A , R2;
+011D F563             25             MOV 63H,A
+011F F520             26             MOV 20H,A
+0121 C3               27             CLR C;
+0122 E4               28             CLR A;
+0123 72D2             29             ORL C,PSW.2;
+0125 3400             30             ADDC A ,#0H;
+0127 700B             31             JNZ OVERFLOW
+0129                  32             NOT_OVERFLOW:
+0129 C3               33             CLR C;
+012A 7207             34             ORL C,07H;
+012C E4               35             CLR A;
+012D 3400             36             ADDC A,#0H;
+012F F562             37             MOV 62H,A;
+0131 02013C           38             LJMP HERE
+0134                  39             OVERFLOW:
+0134 E560             40             MOV A,60H;
+0136 3A               41             ADDC A , R2;
+0137 E4               42             CLR A;
+0138 3400             43             ADDC A,#0H;
+013A F562             44             MOV 62H,A;
+013C                  45             HERE:
+013C 80FE             46             SJMP HERE
+                      47     END     
+                                     
+                                     
+                                     
+                                     
+                                     
+A51 MACRO ASSEMBLER  16_BIT_SUBTRACTION                                                   08/01/2018 00:01:38 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   013CH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+NOT_OVERFLOW . . .  C ADDR   0129H   A   
+OVERFLOW . . . . .  C ADDR   0134H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
