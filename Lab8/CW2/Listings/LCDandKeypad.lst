@@ -1,0 +1,229 @@
+C51 COMPILER V9.59.0.0   LCDANDKEYPAD                                                      10/08/2018 15:14:45 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE LCDANDKEYPAD
+OBJECT MODULE PLACED IN .\Objects\LCDandKeypad.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE LCDandKeypad.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listi
+                    -ngs\LCDandKeypad.lst) TABS(2) OBJECT(.\Objects\LCDandKeypad.obj)
+
+line level    source
+
+   1          #include "at89c5131.h"
+   2          #include "stdio.h"
+   3          sbit CS_BAR = P1^4;                 // Chip Select for the ADC
+   4          sbit LCD_rs = P0^0;                 // LCD Register Select
+   5          sbit LCD_rw = P0^1;                 // LCD Read/Write
+   6          sbit LCD_en = P0^2;                 // LCD Enable
+   7          sbit LCD_busy = P2^7;               // LCD Busy Flag
+   8          sbit ONULL = P1^0;
+   9          sbit RS=P0^0;
+  10          sbit RW=P0^1;
+  11          sbit EN=P0^2;
+  12          void lcd_init(void);
+  13          void lcd_cmd(unsigned int i);
+  14          void lcd_char(unsigned char ch);
+  15          void lcd_write_string(unsigned char *s);
+  16          void port_init(void);
+  17          void keypad_init(void);
+  18          void sdelay(int delay);
+  19          unsigned char read_keypad(void);
+  20          
+  21          void msdelay(unsigned int time)
+  22          {
+  23   1        int i,j;
+  24   1        for(i=0;i<time;i++)
+  25   1        {
+  26   2          for(j=0;j<382;j++);
+  27   2        }
+  28   1      }
+  29          void main(void){
+  30   1      lcd_init();
+  31   1      keypad_init();
+  32   1      lcd_cmd(0x80);
+  33   1      lcd_write_string("Key Pressed:\0");
+  34   1      while(1); 
+  35   1      }
+  36          
+  37          
+  38          void keypad_interrupt(void) interrupt 8
+  39          { unsigned char pressed = read_keypad();
+  40   1        KBF = 00;
+  41   1        lcd_cmd(0x8D);
+  42   1        lcd_char(pressed);
+  43   1        msdelay(10);
+  44   1        
+  45   1        
+  46   1      } 
+  47          void keypad_init(void)
+  48          {
+  49   1            P1=0xF0;
+  50   1            KBE=0xF0;  //MOV 0x9D,#0xF0  ;KBE
+  51   1            KBLS=0x0F;   //MOV 0x9C,#0x0F  ;KBLS
+  52   1          KBF=00; //0x9E,#00    ;KBF
+  53   1            IEN1=0x01;   //MOV 0xB1,#0x01  ;IE1
+  54   1            EA=1;
+C51 COMPILER V9.59.0.0   LCDANDKEYPAD                                                      10/08/2018 15:14:45 PAGE 2   
+
+  55   1      } 
+  56          unsigned char read_keypad(void)
+  57          {
+  58   1      
+  59   1         unsigned char key=0,row=0,col=0,no=0,no_1=0,temp=0;
+  60   1         unsigned int i=0;
+  61   1         unsigned char final_val=0;
+  62   1        
+  63   1         P1= 0xF0;
+  64   1        
+  65   1         temp=((~P1) & 0xF0)>>4; //row
+  66   1         i=0;
+  67   1         while(i<=3)
+  68   1         {
+  69   2            if(((temp>>i)&0x01)==1)
+  70   2            {
+  71   3              row=i;
+  72   3              break;
+  73   3            }
+  74   2            i++;      
+  75   2         }
+  76   1         P1=0x0F;
+  77   1         temp=((~P1) & 0x0F); //col 
+  78   1         i=0;
+  79   1         while(i<=3)
+  80   1         {
+  81   2            if(((temp>>i) & 0x01)==1)
+  82   2            {
+  83   3              col=i;      
+  84   3              break;
+  85   3            }
+  86   2            i++;      
+  87   2         }
+  88   1         //col=i;
+  89   1         no=(4*row)+col;
+  90   1         //delay_in_ms(15);
+  91   1         P1=0xF0;
+  92   1         temp=((~P1) & 0xF0)>>4; //row 
+  93   1         i=0;
+  94   1         while(i<=3)
+  95   1         {
+  96   2            if(((temp>>i) & 0x01)==1)
+  97   2            {
+  98   3              row=i;  
+  99   3              break;
+ 100   3            }
+ 101   2            i++;      
+ 102   2         }
+ 103   1         P1=0x0F;
+ 104   1         temp=((~P1)&0x0F);
+ 105   1         i=0;
+ 106   1         while(i<=3)
+ 107   1         {
+ 108   2            if(((temp>>i) & 0x01)==1)
+ 109   2            {
+ 110   3              col=i;  
+ 111   3              break;
+ 112   3            }
+ 113   2            i++;      
+ 114   2         }   
+ 115   1         //col=i;
+ 116   1         no_1=4*row+col;
+C51 COMPILER V9.59.0.0   LCDANDKEYPAD                                                      10/08/2018 15:14:45 PAGE 3   
+
+ 117   1         if(no==no_1)
+ 118   1         {
+ 119   2            final_val=no;
+ 120   2         }
+ 121   1         final_val += 48;
+ 122   1         
+ 123   1         if(final_val > 57 && final_val < 65)
+ 124   1          final_val += 7;
+ 125   1         
+ 126   1         P1=0xF0;
+ 127   1         
+ 128   1         while(P1!= 0xF0)
+ 129   1             P1= 0xF0;
+ 130   1         
+ 131   1          KBF=0x00;
+ 132   1          while(KBF); //Wait till flag gets cleared
+ 133   1           
+ 134   1         return final_val;
+ 135   1      }
+ 136          
+ 137          
+ 138          
+ 139          /**
+ 140           * FUNCTION_PURPOSE: A delay of 15us for a 24 MHz crystal
+ 141           * FUNCTION_INPUTS: void
+ 142           * FUNCTION_OUTPUTS: none
+ 143           */
+ 144          void sdelay(int delay)
+ 145          {
+ 146   1        char d=0;
+ 147   1        while(delay>0)
+ 148   1        {
+ 149   2          for(d=0;d<5;d++);
+ 150   2          delay--;
+ 151   2        }
+ 152   1      }
+ 153          
+ 154          void lcd_cmd(unsigned int i)
+ 155          {
+ 156   1        RS=0;
+ 157   1        RW=0;
+ 158   1        EN=1;
+ 159   1        P2=i;
+ 160   1        msdelay(10);
+ 161   1        EN=0;
+ 162   1      }
+ 163          void lcd_char(unsigned char ch)
+ 164          {
+ 165   1        RS=1;
+ 166   1        RW=0;
+ 167   1        EN=1;
+ 168   1        P2=ch;
+ 169   1        msdelay(10);
+ 170   1        EN=0;
+ 171   1      }
+ 172          void lcd_write_string(unsigned char *s)
+ 173          {
+ 174   1        while(*s!='\0')
+ 175   1        {
+ 176   2          lcd_char(*s++);
+ 177   2        }
+ 178   1      }
+C51 COMPILER V9.59.0.0   LCDANDKEYPAD                                                      10/08/2018 15:14:45 PAGE 4   
+
+ 179          void lcd_init(void)
+ 180          {
+ 181   1        //port_init();
+ 182   1        lcd_cmd(0x38);
+ 183   1        msdelay(4);
+ 184   1        lcd_cmd(0x06);
+ 185   1        msdelay(4);
+ 186   1        lcd_cmd(0x0C);
+ 187   1        msdelay(4);
+ 188   1        lcd_cmd(0x01);
+ 189   1        msdelay(4);
+ 190   1        lcd_cmd(0x80);
+ 191   1      }
+ 192          void port_init(void)
+ 193          {
+ 194   1        P2=0x00;
+ 195   1        EN=0;
+ 196   1        RS=0;
+ 197   1        RW=0;
+ 198   1      }
+ 199            
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    572    ----
+   CONSTANT SIZE    =     14    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

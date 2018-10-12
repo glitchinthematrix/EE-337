@@ -1,0 +1,270 @@
+C51 COMPILER V9.59.0.0   CW3                                                               10/08/2018 16:06:29 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE CW3
+OBJECT MODULE PLACED IN .\Objects\CW3.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE CW3.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\CW3.l
+                    -st) TABS(2) OBJECT(.\Objects\CW3.obj)
+
+line level    source
+
+   1          #include "at89c5131.h"
+   2          #include "stdio.h"
+   3          sbit CS_BAR = P1^4;                 // Chip Select for the ADC
+   4          sbit LCD_rs = P0^0;                 // LCD Register Select
+   5          sbit LCD_rw = P0^1;                 // LCD Read/Write
+   6          sbit LCD_en = P0^2;                 // LCD Enable
+   7          sbit LCD_busy = P2^7;               // LCD Busy Flag
+   8          sbit ONULL = P1^0;
+   9          sbit RS=P0^0;
+  10          sbit RW=P0^1;
+  11          sbit EN=P0^2;
+  12          sbit LED = P1^7;
+  13          sbit LED1 = P1^6;
+  14          sbit Parity = PSW^0;
+  15          sbit tb8 = SCON^3;
+  16          void lcd_init(void);
+  17          void lcd_cmd(unsigned int i);
+  18          void lcd_char(unsigned char ch);
+  19          void lcd_write_string(unsigned char *s);
+  20          void port_init(void);
+  21          void keypad_init(void);
+  22          void sdelay(int delay);
+  23          unsigned char read_keypad(void);
+  24          void Timer_Init();
+  25          void init_serial();
+  26          
+  27          unsigned char c = 'N';
+  28          void msdelay(unsigned int time)
+  29          {
+  30   1        int i,j;
+  31   1        for(i=0;i<time;i++)
+  32   1        {
+  33   2          for(j=0;j<382;j++);
+  34   2        }
+  35   1      }
+  36          
+  37          void main(void){
+  38   1      Timer_init();
+*** WARNING C206 IN LINE 38 OF CW3.c: 'Timer_init': missing function-prototype
+  39   1      init_serial();
+  40   1      lcd_init();
+  41   1      keypad_init();
+  42   1      lcd_cmd(0x80);
+  43   1      lcd_write_string("Key Pressed:\0");
+  44   1      while(1); 
+  45   1      }
+  46          
+  47          
+  48          void keypad_interrupt(void) interrupt 8
+  49          { unsigned char pressed = read_keypad();
+  50   1        KBF = 00;
+  51   1        lcd_cmd(0x8D);
+  52   1        lcd_char(pressed);
+  53   1        msdelay(10);
+C51 COMPILER V9.59.0.0   CW3                                                               10/08/2018 16:06:29 PAGE 2   
+
+  54   1        if(c=='Y'){
+  55   2        ACC = pressed;
+  56   2         ACC +=0; 
+  57   2         tb8 = Parity;
+  58   2         SBUF = ACC;  
+  59   2        }
+  60   1      } 
+  61          void keypad_init(void)
+  62          {
+  63   1            P1=0xF0;
+  64   1            KBE=0xF0;  //MOV 0x9D,#0xF0  ;KBE
+  65   1            KBLS=0x0F;   //MOV 0x9C,#0x0F  ;KBLS
+  66   1          KBF=00; //0x9E,#00    ;KBF
+  67   1            IEN1=0x01;   //MOV 0xB1,#0x01  ;IE1
+  68   1            EA=1;
+  69   1      } 
+  70          unsigned char read_keypad(void)
+  71          {
+  72   1      
+  73   1         unsigned char key=0,row=0,col=0,no=0,no_1=0,temp=0;
+  74   1         unsigned int i=0;
+  75   1         unsigned char final_val=0;
+  76   1        
+  77   1         P1= 0xF0;
+  78   1        
+  79   1         temp=((~P1) & 0xF0)>>4; //row
+  80   1         i=0;
+  81   1         while(i<=3)
+  82   1         {
+  83   2            if(((temp>>i)&0x01)==1)
+  84   2            {
+  85   3              row=i;
+  86   3              break;
+  87   3            }
+  88   2            i++;      
+  89   2         }
+  90   1         P1=0x0F;
+  91   1         temp=((~P1) & 0x0F); //col 
+  92   1         i=0;
+  93   1         while(i<=3)
+  94   1         {
+  95   2            if(((temp>>i) & 0x01)==1)
+  96   2            {
+  97   3              col=i;      
+  98   3              break;
+  99   3            }
+ 100   2            i++;      
+ 101   2         }
+ 102   1         //col=i;
+ 103   1         no=(4*row)+col;
+ 104   1         //delay_in_ms(15);
+ 105   1         P1=0xF0;
+ 106   1         temp=((~P1) & 0xF0)>>4; //row 
+ 107   1         i=0;
+ 108   1         while(i<=3)
+ 109   1         {
+ 110   2            if(((temp>>i) & 0x01)==1)
+ 111   2            {
+ 112   3              row=i;  
+ 113   3              break;
+ 114   3            }
+ 115   2            i++;      
+C51 COMPILER V9.59.0.0   CW3                                                               10/08/2018 16:06:29 PAGE 3   
+
+ 116   2         }
+ 117   1         P1=0x0F;
+ 118   1         temp=((~P1)&0x0F);
+ 119   1         i=0;
+ 120   1         while(i<=3)
+ 121   1         {
+ 122   2            if(((temp>>i) & 0x01)==1)
+ 123   2            {
+ 124   3              col=i;  
+ 125   3              break;
+ 126   3            }
+ 127   2            i++;      
+ 128   2         }   
+ 129   1         //col=i;
+ 130   1         no_1=4*row+col;
+ 131   1         if(no==no_1)
+ 132   1         {
+ 133   2            final_val=no;
+ 134   2         }
+ 135   1         final_val += 48;
+ 136   1         
+ 137   1         if(final_val > 57 && final_val < 65)
+ 138   1          final_val += 7;
+ 139   1         
+ 140   1         P1=0xF0;
+ 141   1         
+ 142   1         while(P1!= 0xF0)
+ 143   1             P1= 0xF0;
+ 144   1         
+ 145   1          KBF=0x00;
+ 146   1          while(KBF); //Wait till flag gets cleared
+ 147   1           
+ 148   1         return final_val;
+ 149   1      }
+ 150          
+ 151          
+ 152          
+ 153          /**
+ 154           * FUNCTION_PURPOSE: A delay of 15us for a 24 MHz crystal
+ 155           * FUNCTION_INPUTS: void
+ 156           * FUNCTION_OUTPUTS: none
+ 157           */
+ 158          
+ 159          void lcd_cmd(unsigned int i)
+ 160          {
+ 161   1        RS=0;
+ 162   1        RW=0;
+ 163   1        EN=1;
+ 164   1        P2=i;
+ 165   1        msdelay(10);
+ 166   1        EN=0;
+ 167   1      }
+ 168          void lcd_char(unsigned char ch)
+ 169          {
+ 170   1        RS=1;
+ 171   1        RW=0;
+ 172   1        EN=1;
+ 173   1        P2=ch;
+ 174   1        msdelay(10);
+ 175   1        EN=0;
+ 176   1      }
+ 177          void lcd_write_string(unsigned char *s)
+C51 COMPILER V9.59.0.0   CW3                                                               10/08/2018 16:06:29 PAGE 4   
+
+ 178          {
+ 179   1        while(*s!='\0')
+ 180   1        {
+ 181   2          lcd_char(*s++);
+ 182   2        }
+ 183   1      }
+ 184          void lcd_init(void)
+ 185          {
+ 186   1        //port_init();
+ 187   1        lcd_cmd(0x38);
+ 188   1        msdelay(4);
+ 189   1        lcd_cmd(0x06);
+ 190   1        msdelay(4);
+ 191   1        lcd_cmd(0x0C);
+ 192   1        msdelay(4);
+ 193   1        lcd_cmd(0x01);
+ 194   1        msdelay(4);
+ 195   1        lcd_cmd(0x80);
+ 196   1      }
+ 197          void port_init(void)
+ 198          {
+ 199   1        P2=0x00;
+ 200   1        EN=0;
+ 201   1        RS=0;
+ 202   1        RW=0;
+ 203   1      }
+ 204          void ISR_Serial(void) interrupt 4
+ 205          {
+ 206   1      if (TI==1){
+ 207   2        TI = 0;}
+ 208   1      else if (RI == 1){
+ 209   2        c = SBUF;
+ 210   2        RI=0;
+ 211   2      }
+ 212   1      }
+ 213          void Timer_Init() 
+ 214          {
+ 215   1      TMOD = 0X20;
+ 216   1      TH1 = 0xFD;
+ 217   1      TH1 = 0xCC;
+ 218   1      TR1 = 1;
+ 219   1      TMOD |= 0X20;
+ 220   1      }
+ 221          
+ 222          void init_serial()
+ 223          {
+ 224   1      //Initialize serial communication and interrupts
+ 225   1      SCON |= 0XD0;
+ 226   1      ES = 1;
+ 227   1      EA = 1;
+ 228   1      }
+ 229          void sdelay(int delay)
+ 230          {
+ 231   1        char d=0;
+ 232   1        while(delay>0)
+ 233   1        {
+ 234   2          for(d=0;d<5;d++);
+ 235   2          delay--;
+ 236   2        }
+ 237   1      }
+
+
+C51 COMPILER V9.59.0.0   CW3                                                               10/08/2018 16:06:29 PAGE 5   
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    629    ----
+   CONSTANT SIZE    =     14    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
