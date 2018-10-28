@@ -1,0 +1,133 @@
+A51 MACRO ASSEMBLER  Q2                                                                   09/01/2018 10:56:01 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Q2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Q2.asm SET(SMALL) DEBUG PRINT(.\Listings\Q2.lst) OBJECT(.\Objects\Q2.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0097                 1     led equ p1.7 
+  0093                 2     switch equ p1.3
+                       3     
+                       4     ;------
+                       5     ;name: Bhishma;
+                       6     ;LED toggle
+                       7     ;----
+0000                   8     org 000h
+0000 020063            9     ljmp main
+0030                  10     org 30h
+0030 D2D5             11     DELAY: SETB PSW.5
+0032 AB4F             12                MOV R3, 4FH
+0034                  13     BACK2:
+0034 7DC8             14                MOV R5,#200
+0036                  15     BACK1:
+0036 79FF             16                MOV R1,#0FFH
+0038                  17     BACK:
+0038 D9FE             18                DJNZ R1, BACK
+003A DDFA             19                DJNZ R5, BACK1
+003C DBF6             20                DJNZ R3, BACK2
+003E C2D5             21                CLR PSW.5
+0040 22               22                RET
+                      23                
+0041 D2D5             24     DELAY1: SETB PSW.5
+0043 7B0A             25                MOV R3, #10
+0045                  26     BACK4:
+0045 7D64             27                MOV R5,#100
+0047                  28     BACK5:
+0047 79FF             29                MOV R1,#0FFH
+0049                  30     BACK6:
+0049 D9FE             31                DJNZ R1, BACK6
+004B DDFA             32                DJNZ R5, BACK5
+004D DBF6             33                DJNZ R3, BACK4
+004F C2D5             34                CLR PSW.5
+0051 22               35                RET
+0052 D2D5             36     DELAY2: SETB PSW.5
+0054 7B05             37                MOV R3, #5
+0056                  38     BACK8:
+0056 7D32             39                MOV R5,#50
+0058                  40     BACK9:
+0058 79FF             41                MOV R1,#0FFH
+005A                  42     BACK10:
+005A D9FE             43                DJNZ R1, BACK10
+005C DDFA             44                DJNZ R5, BACK9
+005E DBF6             45                DJNZ R3, BACK8
+0060 C2D5             46                CLR PSW.5
+0062 22               47                RET
+                      48        
+0063                  49     MAIN:   
+0063 754F50           50                     MOV 4FH, #80
+0066 7590FF           51                     mov p1,#0ffh
+0069 A293             52     LOOP:   mov c,switch
+006B E4               53                     clr a
+006C 3400             54                     addc a,#0
+006E F520             55                     mov 20h,a
+0070 120030           56                     LCALL delay
+0073 B297             57                     cpl led
+A51 MACRO ASSEMBLER  Q2                                                                   09/01/2018 10:56:01 PAGE     2
+
+0075 A293             58                     mov c,switch
+0077 E4               59                     clr a
+0078 3400             60                     addc a,#0
+007A 6520             61                     xrl a,20h
+007C B4001A           62                     cjne a,#00,halve_period
+007F 80E8             63                     sjmp loop
+0081                  64     special_case:
+0081 A293             65                     mov c,switch
+0083 E4               66                     clr a
+0084 3400             67                     addc a,#0
+0086 F520             68                     mov 20h,a
+0088 120041           69                     lcall delay1
+008B B297             70                     cpl led
+008D A293             71                     mov c,switch
+008F E4               72                     clr a
+0090 3400             73                     addc a,#0
+0092 6520             74                     xrl a,20h
+0094 B400CC           75                     cjne a,#00,main
+0097 80E8             76                     sjmp special_case
+                      77     
+                      78                     
+0099                  79     halve_period:
+0099 75F002           80                     mov b, #2
+009C E54F             81                     mov a,4fh
+009E 84               82                     div ab
+009F F54F             83                     mov 4fh,a
+00A1 B405C5           84                     cjne a,#5,loop
+00A4 80DB             85                     sjmp special_case
+                      86     END             
+A51 MACRO ASSEMBLER  Q2                                                                   09/01/2018 10:56:01 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+BACK . . . . . . .  C ADDR   0038H   A   
+BACK1. . . . . . .  C ADDR   0036H   A   
+BACK10 . . . . . .  C ADDR   005AH   A   
+BACK2. . . . . . .  C ADDR   0034H   A   
+BACK4. . . . . . .  C ADDR   0045H   A   
+BACK5. . . . . . .  C ADDR   0047H   A   
+BACK6. . . . . . .  C ADDR   0049H   A   
+BACK8. . . . . . .  C ADDR   0056H   A   
+BACK9. . . . . . .  C ADDR   0058H   A   
+DELAY. . . . . . .  C ADDR   0030H   A   
+DELAY1 . . . . . .  C ADDR   0041H   A   
+DELAY2 . . . . . .  C ADDR   0052H   A   
+HALVE_PERIOD . . .  C ADDR   0099H   A   
+LED. . . . . . . .  B ADDR   0090H.7 A   
+LOOP . . . . . . .  C ADDR   0069H   A   
+MAIN . . . . . . .  C ADDR   0063H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+SPECIAL_CASE . . .  C ADDR   0081H   A   
+SWITCH . . . . . .  B ADDR   0090H.3 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

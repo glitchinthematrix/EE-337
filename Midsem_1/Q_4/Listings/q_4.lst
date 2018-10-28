@@ -1,0 +1,90 @@
+A51 MACRO ASSEMBLER  Q_4                                                                  09/01/2018 13:03:05 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\q_4.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE q_4.asm SET(SMALL) DEBUG PRINT(.\Listings\q_4.lst) OBJECT(.\Objects\q_4
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 000h
+0000 020100            2             ljmp main
+                       3             
+0100                   4             org 100h
+0100                   5             main:
+0100 7900              6             mov r1,#00h
+0102 7A00              7             mov r2,#00h
+                       8             
+0104 E573              9             repeat: mov a,73h
+0106 2551             10             add a,51h
+0108 F573             11             mov 73h,a
+010A E4               12             clr a
+010B 3400             13             addc a,#0
+010D F520             14             mov 20h,a
+010F E572             15             mov a,72h
+0111 2552             16             add a,52h
+0113 F572             17             mov 72h,a
+0115 E4               18             clr a
+0116 3400             19             addc a,#0
+0118 F521             20             mov 21h,a
+011A E572             21             mov  a,72h
+011C 2520             22             add a,20h
+011E F572             23             mov 72h,a
+0120 E4               24             clr a
+0121 3400             25             addc a,#0
+0123 F522             26             mov 22h,a
+0125 E571             27             mov a,71h
+0127 2521             28             add a,21h
+0129 F571             29             mov 71h,a
+012B E4               30             clr a
+012C 3400             31             addc a,#0
+012E F523             32             mov 23h,a
+0130 E571             33             mov a,71h
+0132 2522             34             add a,22h
+0134 F571             35             mov 71h,a
+0136 E4               36             clr a
+0137 3400             37             addc a,#0
+0139 F524             38             mov 24h,a
+013B E570             39             mov a,70h
+013D 2523             40             add a,23h
+013F 2524             41             add a,24h
+0141 F570             42             mov 70h,a
+                      43                     
+                      44             
+0143 E9               45             mov a,r1
+0144 2401             46             add a,#1
+0146 F9               47             mov r1,a
+0147 E4               48         clr a
+0148 3A               49             addc a,r2
+0149 FA               50             mov r2,a
+014A E561             51             mov a,61h
+014C B501B5           52             cjne a, 1,repeat
+014F E560             53             mov a,60h
+0151 B502B0           54             cjne a,2,repeat
+0154 80FE             55             here:sjmp here
+                      56             
+                      57             
+A51 MACRO ASSEMBLER  Q_4                                                                  09/01/2018 13:03:05 PAGE     2
+
+                      58             end
+                                     
+                             
+                                     
+A51 MACRO ASSEMBLER  Q_4                                                                  09/01/2018 13:03:05 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0154H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+REPEAT . . . . . .  C ADDR   0104H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

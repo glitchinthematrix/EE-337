@@ -1,0 +1,113 @@
+A51 MACRO ASSEMBLER  Q1                                                                   10/06/2018 10:38:40 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Q1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Q1.asm SET(SMALL) DEBUG PRINT(.\Listings\Q1.lst) OBJECT(.\Objects\Q1.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+                       2             
+0000 02000E            3     ljmp main
+                       4     
+000B                   5     org 000bh       
+000B 020025            6     ljmp isr_t0
+                       7     
+000E                   8     main:
+000E 758901            9     mov tmod, #01h
+0011 7983             10     mov r1,#83h
+0013 7884             11     mov r0,#84h
+0015 774E             12     mov @r1,#4eh
+0017 7620             13     mov @r0,#20h
+0019 7A64             14     mov r2,#100
+001B C297             15     clr p1.7
+001D D2A9             16     setb et0
+001F D2AF             17     setb ea
+0021 D28C             18     setb tr0
+0023 80FE             19     here:sjmp here
+                      20     
+                      21     
+0025                  22     isr_t0:
+0025 1A               23     dec r2
+0026 1131             24     acall load_timer0
+0028 EA               25     mov a,r2
+0029 B40004           26     cjne a,#0,cont
+002C B297             27     cpl p1.7
+002E 7A64             28     mov r2,#100
+0030                  29     cont:
+0030 32               30     reti
+                      31     ;-----------
+0031                  32     load_timer0:
+0031 7984             33     mov r1,#84h
+0033 C3               34     clr c
+0034 E4               35     clr a
+0035 97               36     subb a,@r1
+0036 F58A             37     mov tl0,a
+0038 E4               38     clr a
+0039 7983             39     mov r1,#83h
+003B 97               40     subb a,@r1
+003C F58C             41     mov th0,a
+003E 22               42     ret
+                      43     
+                      44     
+                      45     
+                      46     
+                      47     
+                      48     
+                      49     
+                      50     
+                      51     
+                      52     
+                      53     
+                      54     
+                      55     
+                      56     
+                      57     
+A51 MACRO ASSEMBLER  Q1                                                                   10/06/2018 10:38:40 PAGE     2
+
+                      58     
+                      59     
+                      60     
+                      61     
+                      62     
+                      63     
+                      64     
+                      65     
+                      66     
+                      67     
+                      68     
+                      69     
+                      70     
+                      71     
+                      72     
+                      73     
+                      74     
+                      75     end
+A51 MACRO ASSEMBLER  Q1                                                                   10/06/2018 10:38:40 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CONT . . . . . . .  C ADDR   0030H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+HERE . . . . . . .  C ADDR   0023H   A   
+ISR_T0 . . . . . .  C ADDR   0025H   A   
+LOAD_TIMER0. . . .  C ADDR   0031H   A   
+MAIN . . . . . . .  C ADDR   000EH   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

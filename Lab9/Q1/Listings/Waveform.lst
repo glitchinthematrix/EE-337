@@ -1,0 +1,89 @@
+C51 COMPILER V9.59.0.0   WAVEFORM                                                          10/15/2018 15:14:06 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE WAVEFORM
+OBJECT MODULE PLACED IN .\Objects\Waveform.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Waveform.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\
+                    -Waveform.lst) TABS(2) OBJECT(.\Objects\Waveform.obj)
+
+line level    source
+
+   1          #include "at89c5131.h"
+   2          #include "stdio.h"
+   3          
+   4          void SPI_Init();
+   5          sbit CS_BAR = P1^4;
+   6          sbit FS = P1^5; 
+   7          bit transmit_completed= 0;  
+   8          unsigned char serial_data;            // To check if spi data transmit is complete
+   9          void main(void)
+  10          {
+  11   1      SPI_Init();
+  12   1      while(1)
+  13   1        {
+  14   2          CS_BAR = 0;  
+  15   2          FS = 1;  
+  16   2          FS = 0;                             // falling edge of CS bar
+  17   2          SPDAT= 0x08;                      // first 4 bits will be address of the channel
+  18   2          while(!transmit_completed);               // wait for the transmit complete flag              // save the 
+  19   2          transmit_completed = 0;                   // make the flag 0
+  20   2          SPDAT =0x00;  
+  21   2          while(!transmit_completed); 
+  22   2          transmit_completed = 0; 
+  23   2          CS_BAR = 1;  
+  24   2        }
+  25   1      
+  26   1      }
+  27          
+  28          void SPI_Init()
+  29          {
+  30   1        
+  31   1        CS_BAR = 1;                     // DISABLE ADC SLAVE SELECT-CS 
+  32   1        FS = 1;
+  33   1        SPCON |= 0x20;                  // P1.1(SSBAR) is available as standard I/O pin 
+  34   1        SPCON |= 0x01;                  // Fclk Periph/4 AND Fclk Periph=12MHz ,HENCE SCK IE. BAUD RATE=3000KHz 
+  35   1        SPCON |= 0x10;                  // Master mode 
+  36   1        SPCON |=0x08;                 // CPOL=0; transmit mode example|| SCK is 0 at idle state
+  37   1        SPCON &= ~0x04;                 // CPHA=0; transmit mode example 
+  38   1        IEN1 |= 0x04;                   // enable spi interrupt 
+  39   1        EA=1;                           // enable interrupts 
+  40   1        SPCON |= 0x40;                  // run spi;ENABLE SPI INTERFACE SPEN= 1 
+  41   1      //  IPH0 |=0x10;
+  42   1      //  IPL0 |=0x10;
+  43   1      }
+  44          
+  45          void it_SPI(void) interrupt 9 /* interrupt address is 0x004B, (Address -3)/8 = interrupt no.*/
+  46          {
+  47   1        switch  ( SPSTA )         /* read and clear spi status register */
+  48   1        {
+  49   2      
+  50   2          case 0x80:  
+  51   2             /* read receive data */
+  52   2          transmit_completed=1;/* set software flag */
+  53   2          serial_data=SPDAT;
+  54   2          break;
+C51 COMPILER V9.59.0.0   WAVEFORM                                                          10/15/2018 15:14:06 PAGE 2   
+
+  55   2      
+  56   2          case 0x10:
+  57   2            
+  58   2          break;
+  59   2        
+  60   2          case 0x40:
+  61   2          break;
+  62   2        }
+  63   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     85    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

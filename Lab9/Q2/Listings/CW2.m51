@@ -1,0 +1,350 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    10/22/2018  14:08:00  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\Waveform1.obj TO .\Objects\CW2 PRINT (.\Listings\CW2.m51) R
+>> AMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (?C_STARTUP)
+  .\Objects\Waveform1.obj (WAVEFORM1)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\CW2 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+                    0008H     0018H                  *** GAP ***
+            BIT     0020H.0   0000H.5   UNIT         ?BI?WAVEFORM1
+                    0020H.5   0000H.3                *** GAP ***
+            DATA    0021H     0030H     UNIT         ?DT?WAVEFORM1
+            IDATA   0051H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     000DH                  *** GAP ***
+            CODE    001BH     0003H     ABSOLUTE     
+                    001EH     002DH                  *** GAP ***
+            CODE    004BH     0003H     ABSOLUTE     
+                    004EH     07B2H                  *** GAP ***
+            CODE    0800H     00BBH     UNIT         ?PR?TIMER0_ISR?WAVEFORM1
+            CODE    08BBH     008CH     UNIT         ?C_C51STARTUP
+            CODE    0947H     0051H     UNIT         ?C_INITSEG
+            CODE    0998H     0029H     UNIT         ?PR?_SDELAY?WAVEFORM1
+            CODE    09C1H     0021H     UNIT         ?PR?MAIN?WAVEFORM1
+            CODE    09E2H     0021H     UNIT         ?PR?_DELAY_MS?WAVEFORM1
+            CODE    0A03H     001EH     UNIT         ?PR?TIMER1_ISR?WAVEFORM1
+            CODE    0A21H     001CH     UNIT         ?PR?SPI_INIT?WAVEFORM1
+            CODE    0A3DH     001CH     UNIT         ?PR?IT_SPI?WAVEFORM1
+            CODE    0A59H     0018H     UNIT         ?PR?TIMER_INIT?WAVEFORM1
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\CW2 (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?WAVEFORM1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  10/22/2018  14:08:00  PAGE 2
+
+
+  +--> ?C_INITSEG
+
+?PR?MAIN?WAVEFORM1
+  +--> ?PR?SPI_INIT?WAVEFORM1
+  +--> ?PR?TIMER_INIT?WAVEFORM1
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\CW2 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:08BBH         SEGMENT       ?C_C51STARTUP
+  I:0051H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:08BEH         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:08BBH         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:08BBH         LINE#         133
+  C:08BDH         LINE#         134
+  C:08BEH         LINE#         135
+  C:08BFH         LINE#         136
+  C:08C1H         LINE#         185
+  C:08C4H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        WAVEFORM1
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0021H         PUBLIC        serial_data
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:0800H         PUBLIC        TIMER0_ISR
+  D:00B0H         PUBLIC        P3
+  C:0A03H         PUBLIC        TIMER1_ISR
+  D:00C0H         PUBLIC        P4
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  10/22/2018  14:08:00  PAGE 3
+
+
+  D:00C3H         PUBLIC        SPCON
+  C:0998H         PUBLIC        _sdelay
+  B:00A8H.7       PUBLIC        EA
+  D:00C4H         PUBLIC        SPSTA
+  D:00A8H         PUBLIC        IEN0
+  D:00B1H         PUBLIC        IEN1
+  D:00B8H         PUBLIC        IPL0
+  B:00B0H.5       PUBLIC        FS
+  B:00B0H.7       PUBLIC        P3_7
+  B:0020H.0       PUBLIC        transmit_completed
+  D:0022H         PUBLIC        high
+  D:00D8H         PUBLIC        CCON
+  C:09C1H         PUBLIC        main
+  C:0A3DH         PUBLIC        it_SPI
+  D:0023H         PUBLIC        count
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  C:0A59H         PUBLIC        timer_init
+  D:0024H         PUBLIC        test
+  B:00A8H.1       PUBLIC        ET0
+  B:0020H.1       PUBLIC        part_1
+  B:00A8H.3       PUBLIC        ET1
+  B:0020H.2       PUBLIC        part_2
+  B:0020H.3       PUBLIC        part_3
+  B:00B0H.4       PUBLIC        CS_BAR
+  D:008CH         PUBLIC        TH0
+  D:008DH         PUBLIC        TH1
+  D:008AH         PUBLIC        TL0
+  D:008BH         PUBLIC        TL1
+  D:0044H         PUBLIC        low
+  C:09E2H         PUBLIC        _delay_ms
+  B:0088H.4       PUBLIC        TR0
+  D:00F8H         PUBLIC        UEPINT
+  B:0088H.6       PUBLIC        TR1
+  D:0045H         PUBLIC        triangle_value
+  D:0047H         PUBLIC        it
+  B:0020H.4       PUBLIC        complete
+  C:0A21H         PUBLIC        SPI_Init
+  D:00C8H         PUBLIC        T2CON
+  D:0048H         PUBLIC        i
+  D:004AH         PUBLIC        j
+  D:004CH         PUBLIC        k
+  D:004EH         PUBLIC        x
+  D:004FH         PUBLIC        triangle_value_buf
+  D:00C5H         PUBLIC        SPDAT
+  -------         PROC          MAIN
+  C:09C1H         LINE#         66
+  C:09C1H         LINE#         67
+  C:09C1H         LINE#         68
+  C:09C4H         LINE#         69
+  C:09C7H         LINE#         70
+  C:09C7H         LINE#         71
+  C:09C7H         LINE#         72
+  C:09C9H         LINE#         73
+  C:09CBH         LINE#         74
+  C:09CDH         LINE#         76
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  10/22/2018  14:08:00  PAGE 4
+
+
+  C:09D1H         LINE#         78
+  C:09D4H         LINE#         79
+  C:09D6H         LINE#         81
+  C:09D9H         LINE#         83
+  C:09DCH         LINE#         84
+  C:09DEH         LINE#         85
+  C:09E0H         LINE#         100
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER_INIT
+  C:0A59H         LINE#         102
+  C:0A59H         LINE#         103
+  C:0A59H         LINE#         104
+  C:0A5CH         LINE#         105
+  C:0A5FH         LINE#         106
+  C:0A62H         LINE#         107
+  C:0A65H         LINE#         108
+  C:0A68H         LINE#         109
+  C:0A6AH         LINE#         110
+  C:0A6CH         LINE#         111
+  C:0A6EH         LINE#         112
+  C:0A70H         LINE#         115
+  -------         ENDPROC       TIMER_INIT
+  -------         PROC          SPI_INIT
+  C:0A21H         LINE#         117
+  C:0A21H         LINE#         118
+  C:0A21H         LINE#         120
+  C:0A23H         LINE#         121
+  C:0A25H         LINE#         122
+  C:0A28H         LINE#         123
+  C:0A2BH         LINE#         124
+  C:0A2EH         LINE#         125
+  C:0A31H         LINE#         126
+  C:0A34H         LINE#         127
+  C:0A37H         LINE#         128
+  C:0A39H         LINE#         129
+  C:0A3CH         LINE#         132
+  -------         ENDPROC       SPI_INIT
+  -------         PROC          IT_SPI
+  C:0A3DH         LINE#         134
+  C:0A46H         LINE#         136
+  C:0A4DH         LINE#         137
+  C:0A4DH         LINE#         139
+  C:0A4DH         LINE#         141
+  C:0A4FH         LINE#         142
+  C:0A52H         LINE#         143
+  C:0A52H         LINE#         145
+  C:0A52H         LINE#         147
+  C:0A52H         LINE#         149
+  C:0A52H         LINE#         150
+  C:0A52H         LINE#         151
+  C:0A52H         LINE#         152
+  -------         ENDPROC       IT_SPI
+  -------         PROC          _DELAY_MS
+  D:0006H         SYMBOL        delay
+  -------         DO            
+  D:0004H         SYMBOL        d
+  -------         ENDDO         
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  10/22/2018  14:08:00  PAGE 5
+
+
+  C:09E2H         LINE#         153
+  C:09E2H         LINE#         154
+  C:09E2H         LINE#         155
+  C:09E2H         LINE#         156
+  C:09EDH         LINE#         157
+  C:09EDH         LINE#         158
+  C:09FBH         LINE#         159
+  C:0A00H         LINE#         160
+  C:0A02H         LINE#         161
+  -------         ENDPROC       _DELAY_MS
+  -------         PROC          _SDELAY
+  D:0006H         SYMBOL        delay
+  -------         DO            
+  D:0005H         SYMBOL        d
+  -------         ENDDO         
+  C:0998H         LINE#         162
+  C:0998H         LINE#         163
+  C:0998H         LINE#         164
+  C:0998H         LINE#         165
+  C:09A3H         LINE#         166
+  C:09A3H         LINE#         167
+  C:09B9H         LINE#         168
+  C:09BEH         LINE#         169
+  C:09C0H         LINE#         170
+  -------         ENDPROC       _SDELAY
+  -------         PROC          TIMER1_ISR
+  C:0A03H         LINE#         171
+  C:0A03H         LINE#         174
+  C:0A05H         LINE#         175
+  C:0A08H         LINE#         176
+  C:0A0BH         LINE#         177
+  C:0A0DH         LINE#         178
+  C:0A10H         LINE#         179
+  C:0A18H         LINE#         180
+  C:0A18H         LINE#         181
+  C:0A1EH         LINE#         182
+  C:0A20H         LINE#         184
+  -------         ENDPROC       TIMER1_ISR
+  -------         PROC          TIMER0_ISR
+  C:0800H         LINE#         186
+  C:0809H         LINE#         189
+  C:080BH         LINE#         190
+  C:080EH         LINE#         191
+  C:0811H         LINE#         192
+  C:0813H         LINE#         193
+  C:0817H         LINE#         194
+  C:0817H         LINE#         195
+  C:081DH         LINE#         196
+  C:081DH         LINE#         197
+  C:081FH         LINE#         198
+  C:0821H         LINE#         199
+  C:0823H         LINE#         201
+  C:0823H         LINE#         202
+  C:0825H         LINE#         203
+  C:082DH         LINE#         204
+  C:0835H         LINE#         205
+  C:0839H         LINE#         206
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  10/22/2018  14:08:00  PAGE 6
+
+
+  C:083CH         LINE#         207
+  C:083EH         LINE#         208
+  C:083EH         LINE#         209
+  C:083EH         LINE#         211
+  C:0846H         LINE#         212
+  C:0848H         LINE#         213
+  C:084AH         LINE#         214
+  C:084EH         LINE#         215
+  C:0856H         LINE#         216
+  C:0858H         LINE#         217
+  C:085AH         LINE#         218
+  C:085FH         LINE#         219
+  C:085FH         LINE#         220
+  C:0867H         LINE#         221
+  C:0869H         LINE#         222
+  C:086BH         LINE#         223
+  C:0870H         LINE#         224
+  C:0870H         LINE#         228
+  C:0873H         LINE#         229
+  C:087EH         LINE#         230
+  C:0886H         LINE#         231
+  C:0888H         LINE#         232
+  C:088BH         LINE#         233
+  C:0891H         LINE#         234
+  C:0899H         LINE#         235
+  C:089BH         LINE#         236
+  C:089EH         LINE#         237
+  C:08AAH         LINE#         238
+  C:08B2H         LINE#         239
+  C:08B2H         LINE#         240
+  C:08B4H         LINE#         243
+  -------         ENDPROC       TIMER0_ISR
+  -------         ENDMOD        WAVEFORM1
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_MS?WAVEFORM1
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SDELAY?WAVEFORM1
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 01FCH BYTE (24%) *
+******************************************************************************
+
+Program Size: data=57.5 xdata=0 code=637
+LINK/LOCATE RUN COMPLETE.  2 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,127 @@
+A51 MACRO ASSEMBLER  Q1                                                                   09/01/2018 10:02:57 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Q1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Q1.asm SET(SMALL) DEBUG PRINT(.\Listings\Q1.lst) OBJECT(.\Objects\Q1.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;-----------
+                       2     ;Name: Bhishma Dedhia
+                       3     ;Program: COunting
+                       4     ;----------
+                       5     
+0000                   6     org 000h
+0000 020050            7             ljmp main
+                       8             ;-------------
+0003                   9             check_ones_and_zeros:
+0003 7D00             10             mov r5,#00
+0005 7C00             11             mov r4,#00
+0007 C3               12             clr c
+0008 7200             13             orl c,00h
+000A 4003             14             jc go_to_one
+000C 0D               15             inc r5 
+000D 8001             16             sjmp next
+000F 0C               17             go_to_one: inc r4
+0010 C3               18             next:clr c
+0011 7201             19             orl c,01h
+0013 4003             20             jc go_to_one1
+0015 0D               21             inc r5 
+0016 8001             22             sjmp next1
+0018 0C               23             go_to_one1: inc r4
+0019 C3               24             next1:clr c
+001A 7202             25             orl c,02h
+001C 4003             26             jc go_to_one2
+001E 0D               27             inc r5 
+001F 8001             28             sjmp next2
+0021 0C               29             go_to_one2: inc r4
+0022 C3               30         next2:clr c
+0023 7203             31             orl c,03h
+0025 4003             32             jc go_to_one3
+0027 0D               33             inc r5 
+0028 8001             34             sjmp next3
+002A 0C               35             go_to_one3: inc r4
+002B C3               36             next3:clr c
+002C 7204             37             orl c,04h
+002E 4003             38             jc go_to_one4
+0030 0D               39             inc r5 
+0031 8001             40             sjmp next4
+0033 0C               41             go_to_one4: inc r4
+0034 C3               42             next4:clr c
+0035 7205             43             orl c,05h
+0037 4003             44             jc go_to_one5
+0039 0D               45             inc r5 
+003A 8001             46             sjmp next5
+003C 0C               47             go_to_one5: inc r4
+003D C3               48             next5:clr c
+003E 7206             49             orl c,06h
+0040 4003             50             jc go_to_one6
+0042 0D               51             inc r5 
+0043 8001             52             sjmp next6
+0045 0C               53             go_to_one6: inc r4
+0046 C3               54             next6:clr c
+0047 7207             55             orl c,07h
+0049 4003             56             jc go_to_one7
+004B 0D               57             inc r5
+A51 MACRO ASSEMBLER  Q1                                                                   09/01/2018 10:02:57 PAGE     2
+
+004C 8001             58         sjmp next7
+004E 0C               59             go_to_one7: inc r4
+004F 22               60             next7:ret
+                      61             ;------------
+0050                  62             main:
+0050 756000           63             mov 60h,#00
+0053 756100           64             mov 61h,#00
+0056 7850             65             mov r0,#50h
+0058 7A05             66             mov r2,#5
+005A 8620             67             repeat:mov 20h,@r0
+005C 120003           68             lcall check_ones_and_zeros;
+005F EC               69             mov a,r4
+0060 2560             70             add a,60h
+0062 F560             71             mov 60h,a
+0064 ED               72             mov a,r5
+0065 2561             73             add a,61h
+0067 F561             74             mov 61h,a
+0069 08               75             inc r0
+006A DAEE             76             djnz r2,repeat
+006C 80FE             77             here:sjmp here
+                      78             
+                      79             end
+                                     
+                                     
+A51 MACRO ASSEMBLER  Q1                                                                   09/01/2018 10:02:57 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E               T Y P E  V A L U E   ATTRIBUTES
+
+CHECK_ONES_AND_ZEROS  C ADDR   0003H   A   
+GO_TO_ONE. . . . . .  C ADDR   000FH   A   
+GO_TO_ONE1 . . . . .  C ADDR   0018H   A   
+GO_TO_ONE2 . . . . .  C ADDR   0021H   A   
+GO_TO_ONE3 . . . . .  C ADDR   002AH   A   
+GO_TO_ONE4 . . . . .  C ADDR   0033H   A   
+GO_TO_ONE5 . . . . .  C ADDR   003CH   A   
+GO_TO_ONE6 . . . . .  C ADDR   0045H   A   
+GO_TO_ONE7 . . . . .  C ADDR   004EH   A   
+HERE . . . . . . . .  C ADDR   006CH   A   
+MAIN . . . . . . . .  C ADDR   0050H   A   
+NEXT . . . . . . . .  C ADDR   0010H   A   
+NEXT1. . . . . . . .  C ADDR   0019H   A   
+NEXT2. . . . . . . .  C ADDR   0022H   A   
+NEXT3. . . . . . . .  C ADDR   002BH   A   
+NEXT4. . . . . . . .  C ADDR   0034H   A   
+NEXT5. . . . . . . .  C ADDR   003DH   A   
+NEXT6. . . . . . . .  C ADDR   0046H   A   
+NEXT7. . . . . . . .  C ADDR   004FH   A   
+REPEAT . . . . . . .  C ADDR   005AH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

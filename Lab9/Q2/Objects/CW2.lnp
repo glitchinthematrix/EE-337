@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\Waveform1.obj" 
+TO ".\Objects\CW2" 
+PRINT(".\Listings\CW2.m51") RAMSIZE(256) 

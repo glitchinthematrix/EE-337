@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\notes.obj" 
+TO ".\Objects\Square_tones" 
+PRINT(".\Listings\Square_tones.m51") RAMSIZE(256) 

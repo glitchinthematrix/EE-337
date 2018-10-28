@@ -1,0 +1,105 @@
+A51 MACRO ASSEMBLER  Q3                                                                   09/01/2018 12:44:54 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\q3.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE q3.asm SET(SMALL) DEBUG PRINT(.\Listings\q3.lst) OBJECT(.\Objects\q3.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;-----------------------------------------
+                       2     ; CodeName :signed number Array sorter
+                       3     ; Author   : Bhishma Dedhia
+                       4     ;-----------------------------------------
+                       5     
+0000                   6     org 000h
+0000 020100            7     LJMP MAIN
+                       8     ;------------
+0003                   9     compare_signed_number:
+0003 C3               10             clr c
+0004 E6               11             mov A,@r0
+0005 F4               12             cpl a
+0006 04               13             inc a
+0007 B48001           14             cjne a,#80h,next
+000A 14               15             dec a
+000B F570             16             next:mov 70h,a
+000D 2E               17             add a,r6
+000E F520             18             MOV 20H,A
+0010 C3               19             CLR C;
+0011 E4               20             CLR A;
+0012 72D2             21             ORL C,PSW.2;
+0014 3400             22             ADDC A ,#0H;
+0016 7006             23             JNZ OVERFLOW
+0018                  24             NOT_OVERFLOW:
+0018 C3               25             CLR C;
+0019 7207             26             ORL C,07H;
+001B 020021           27             LJMP exit
+001E                  28             OVERFLOW:
+001E EE               29             MOV A,r6;
+001F 3570             30             ADDC A ,70h ;
+0021                  31             exit: 
+0021 22               32             ret
+                      33     
+                      34     
+                      35     
+                      36     
+                      37     ;------------
+0100                  38     org 100h
+0100                  39     MAIN:
+0100 7A06             40               MOV R2,#06H
+0102 1A               41               DEC R2
+0103                  42     LOOP2:  
+0103 7850             43             MOV R0,#50H
+0105 7B05             44            MOV R3,#05H
+0107 8606             45     LOOP1:  MOV 6,@R0
+0109 8605             46                     MOV 5,@r0
+010B 08               47                     INC R0
+010C 120003           48                     lcall compare_signed_number
+010F 4005             49                     JC SKIP
+0111 ED               50         MOV A,R5
+0112 C6               51             XCH A,@R0
+0113 18               52             DEC R0
+0114 F6               53             MOV @R0,A
+0115 08               54             INC R0
+0116 DBEF             55             SKIP: DJNZ R3, LOOP1
+0118 DAE9             56                   DJNZ R2,LOOP2
+011A 80FE             57        STOP: SJMP STOP
+A51 MACRO ASSEMBLER  Q3                                                                   09/01/2018 12:44:54 PAGE     2
+
+                      58        
+                      59      ;----------- 
+                      60      
+                      61      
+011C                  62      c16_bit_subtractor:
+                      63      
+                      64      
+                      65     END
+                                     
+                                     
+A51 MACRO ASSEMBLER  Q3                                                                   09/01/2018 12:44:54 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E                T Y P E  V A L U E   ATTRIBUTES
+
+C16_BIT_SUBTRACTOR. .  C ADDR   011CH   A   
+COMPARE_SIGNED_NUMBER  C ADDR   0003H   A   
+EXIT. . . . . . . . .  C ADDR   0021H   A   
+LOOP1 . . . . . . . .  C ADDR   0107H   A   
+LOOP2 . . . . . . . .  C ADDR   0103H   A   
+MAIN. . . . . . . . .  C ADDR   0100H   A   
+NEXT. . . . . . . . .  C ADDR   000BH   A   
+NOT_OVERFLOW. . . . .  C ADDR   0018H   A   
+OVERFLOW. . . . . . .  C ADDR   001EH   A   
+PSW . . . . . . . . .  D ADDR   00D0H   A   
+SKIP. . . . . . . . .  C ADDR   0116H   A   
+STOP. . . . . . . . .  C ADDR   011AH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
